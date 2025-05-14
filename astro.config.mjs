@@ -7,6 +7,6 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-  site: 'https://github.com/YanlDev/',
+  site: 'https://deltatesis.com',
   base: '/delta-astro',
 });
