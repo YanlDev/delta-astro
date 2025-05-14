@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- Fondo transparente -->
+  <rect width="200" height="200" fill="transparent"/>
+  
+  <!-- Símbolo Delta principal - triángulo elegante (invertido para modo oscuro) -->
+  <path d="M100 20 L180 160 L20 160 Z" fill="#ffffff" />
+  
+  <!-- Triángulo interno (negativo) que crea una forma de delta más sofisticada (invertido) -->
+  <path d="M100 60 L150 140 L50 140 Z" fill="#121212" />
+  
+  <!-- Elemento central - forma abstracta de flecha ascendente (invertido) -->
+  <path d="M100 75 L100 125 L85 110 L100 125 L115 110" fill="#ffffff" stroke="#ffffff" stroke-width="2"/>
+</svg>
