@@ -1,0 +1,193 @@
+---
+import Logo from "../assets/img/LogoDelta.svg";
+---
+
+<header class="w-full">
+  <!-- Overlay oscuro cuando el sidebar está abierto -->
+  <div
+    id="sidebar-overlay"
+    class="fixed inset-0 bg-black transition-opacity duration-300 ease-in-out z-40 opacity-0 pointer-events-none"
+  >
+  </div>
+
+  <!-- Navbar desktop - SOLO visible en desktop -->
+  <nav
+    class="fixed w-full bg-transparent z-30 transition-all duration-300 backdrop-blur-sm hidden md:block"
+  >
+    <div class="container mx-auto flex justify-between items-center px-4 py-1">
+      <!-- Logo del navbar -->
+      <div class="flex flex-grow-0 basis-1/4 items-center">
+        <img class="h-16" src={Logo.src} alt="Logo de Delta Tesis:" />
+      </div>
+
+      <!-- Enlaces de navegación -->
+      <ul class="flex items-center justify-center [&>li>a]:px-4 [&>li>a]:py-2">
+        <li>
+          <a
+            href="#"
+            class="font-sans font-medium text-blue-100 hover:text-white relative pb-1 transition-all duration-300 ease-in-out before:content-[''] before:absolute before:w-0 before:h-0.5 before:bottom-0 before:left-1/2 before:bg-blue-400 before:transition-all before:duration-300 before:ease-in-out hover:before:w-full hover:before:left-0"
+          >
+            Inicio
+          </a>
+        </li>
+        <li>
+          <a
+            href="#"
+            class="font-sans font-medium text-blue-100 hover:text-white relative pb-1 transition-all duration-300 ease-in-out before:content-[''] before:absolute before:w-0 before:h-0.5 before:bottom-0 before:left-1/2 before:bg-blue-400 before:transition-all before:duration-300 before:ease-in-out hover:before:w-full hover:before:left-0"
+          >
+          Servicios
+          </a>
+        </li>
+        <li>
+          <a
+            href="#"
+            class="font-sans font-medium text-blue-100 hover:text-white relative pb-1 transition-all duration-300 ease-in-out before:content-[''] before:absolute before:w-0 before:h-0.5 before:bottom-0 before:left-1/2 before:bg-blue-400 before:transition-all before:duration-300 before:ease-in-out hover:before:w-full hover:before:left-0"
+          >
+            Revisión Turni
+          </a>
+        </li>
+      </ul>
+
+      <!-- Botón de WhatsApp -->
+      <div class="flex items-center flex-grow-0 basis-1/4 justify-end">
+        <button
+          class="group relative h-12 overflow-hidden rounded-md bg-blue-600 px-6 text-white transition-all duration-300 hover:bg-blue-700 hover:ring-2 hover:ring-blue-400 hover:ring-offset-2 hover:ring-offset-slate-900"
+        >
+          <span
+            class="absolute right-0 -mt-12 h-32 w-8 translate-x-12 rotate-12 transform bg-white opacity-10 transition-all duration-1000 ease-out group-hover:-translate-x-40"
+          ></span>
+          <span><i class="fa-brands fa-whatsapp mr-2"></i>WhatsApp</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Botón flotante para menú móvil - SOLO en móvil -->
+  <button
+    id="mobile-menu-btn"
+    class="md:hidden fixed top-5 right-6 z-30 w-10 h-10 rounded-full bg-blue-600/50 text-white shadow-lg flex items-center justify-center hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="h-6 w-6"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M4 6h16M4 12h16M4 18h16"></path>
+    </svg>
+  </button>
+
+  <!-- Sidebar móvil -->
+  <div
+    id="mobile-sidebar"
+    class="fixed top-0 right-0 h-full w-72 bg-transparent backdrop-blur-sm shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out z-50 md:hidden"
+  >
+    <div class="flex flex-col h-full">
+      <!-- Cabecera del sidebar con logo y botón cerrar -->
+      <div
+        class="flex justify-between items-center p-4 border-b border-slate-700/50"
+      >
+        <div class="flex items-center">
+          <img src={Logo.src} alt="Logo" class="h-10 w-auto mr-3" />
+          <div class="text-xl font-bold text-white">Delta Tesis</div>
+        </div>
+        <button
+          id="close-sidebar-btn"
+          class="text-gray-300 hover:text-white p-2 rounded-md hover:bg-slate-800/50 transition-colors"
+        >
+          <svg
+            class="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Enlaces del sidebar -->
+      <div class="flex-grow overflow-y-auto py-4">
+        <div class="px-4 space-y-1">
+          <a
+            href="/"
+            class="flex items-center py-3 px-4 text-blue-100 hover:text-white hover:bg-slate-800/50 rounded-md transition-colors"
+          >
+            <span>Inicio</span>
+          </a>
+          <a
+            href="/servicios"
+            class="flex items-center py-3 px-4 text-blue-100 hover:text-white hover:bg-slate-800/50 rounded-md transition-colors"
+          >
+            <span>Servicios</span>
+          </a>
+          <a
+            href="/turnitin"
+            class="flex items-center py-3 px-4 text-blue-100 hover:text-white hover:bg-slate-800/50 rounded-md transition-colors"
+          >
+            <span>Turnitin</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Pie del sidebar con botón WhatsApp -->
+      <div class="p-4 border-t border-slate-700/50">
+        <button
+          class="flex items-center justify-center w-full py-3 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+        >
+          <i class="fa-brands fa-whatsapp mr-2 text-lg"></i>
+          <span>WhatsApp</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+    const closeSidebarBtn = document.getElementById("close-sidebar-btn");
+    const sidebar = document.getElementById("mobile-sidebar");
+    const overlay = document.getElementById("sidebar-overlay");
+
+    // Función para abrir el sidebar
+    const openSidebar = () => {
+      sidebar?.classList.remove("translate-x-full");
+      sidebar?.classList.add("translate-x-0");
+      overlay?.classList.remove("opacity-0", "pointer-events-none");
+      overlay?.classList.add("opacity-50", "pointer-events-auto");
+      document.body.style.overflow = "hidden"; // Prevenir scroll
+    };
+
+    // Función para cerrar el sidebar
+    const closeSidebar = () => {
+      sidebar?.classList.remove("translate-x-0");
+      sidebar?.classList.add("translate-x-full");
+      overlay?.classList.remove("opacity-50", "pointer-events-auto");
+      overlay?.classList.add("opacity-0", "pointer-events-none");
+      document.body.style.overflow = ""; // Restaurar scroll
+    };
+
+    // Event listeners
+    mobileMenuBtn?.addEventListener("click", openSidebar);
+    closeSidebarBtn?.addEventListener("click", closeSidebar);
+    overlay?.addEventListener("click", closeSidebar);
+
+    // Cerrar sidebar al redimensionar a desktop
+    window.addEventListener("resize", () => {
+      if (window.innerWidth >= 768) {
+        closeSidebar();
+      }
+    });
+  });
+</script>

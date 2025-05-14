@@ -1,0 +1,206 @@
+---
+// No es necesario importar imágenes para esta sección
+---
+
+<section id="por-que-elegirnos" class="py-20 bg-slate-800 relative overflow-hidden">
+  <!-- Elementos decorativos de fondo -->
+  <div class="absolute inset-0 opacity-10">
+    <div class="absolute top-1/4 -right-24 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply blur-2xl"></div>
+    <div class="absolute bottom-0 -left-24 w-72 h-72 bg-indigo-500 rounded-full mix-blend-multiply blur-2xl"></div>
+  </div>
+
+  <!-- Grid de fondo -->
+  <div class="absolute inset-0 opacity-5">
+    <div class="h-full w-full grid grid-cols-12 gap-1">
+      {Array(12).fill(0).map((_, i) => (
+        <div class="h-full border-r border-gray-300"></div>
+      ))}
+    </div>
+    <div class="h-full w-full grid grid-rows-6 gap-1">
+      {Array(6).fill(0).map((_, i) => (
+        <div class="w-full border-b border-gray-300"></div>
+      ))}
+    </div>
+  </div>
+
+  <div class="container mx-auto px-4 relative z-10">
+    <!-- Encabezado de la sección -->
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">¿Por Qué Elegirnos?</h2>
+      <p class="text-gray-300 max-w-3xl mx-auto">
+        Nuestra trayectoria y compromiso con la excelencia académica nos distinguen como 
+        la mejor opción para el desarrollo de tu proyecto académico.
+      </p>
+      <div class="w-24 h-1 bg-blue-600 mx-auto mt-6"></div>
+    </div>
+
+    <!-- Contador de estadísticas -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+      <div class="bg-slate-700/50 backdrop-blur-sm border border-slate-600/50 rounded-lg p-6 text-center transform transition duration-300 hover:scale-105">
+        <div class="text-5xl font-bold text-white mb-2">
+          <span class="contador" data-target="100">0</span>%
+        </div>
+        <div class="text-blue-400 font-medium">Tesis Aprobadas</div>
+      </div>
+      
+      <div class="bg-slate-700/50 backdrop-blur-sm border border-slate-600/50 rounded-lg p-6 text-center transform transition duration-300 hover:scale-105">
+        <div class="text-5xl font-bold text-white mb-2">
+          <span class="contador" data-target="96">0</span>%
+        </div>
+        <div class="text-blue-400 font-medium">Satisfacción</div>
+      </div>
+      
+      <div class="bg-slate-700/50 backdrop-blur-sm border border-slate-600/50 rounded-lg p-6 text-center transform transition duration-300 hover:scale-105">
+        <div class="text-5xl font-bold text-white mb-2">
+          <span class="contador" data-target="90">0</span>%
+        </div>
+        <div class="text-blue-400 font-medium">Recurrencia</div>
+      </div>
+      
+      <div class="bg-slate-700/50 backdrop-blur-sm border border-slate-600/50 rounded-lg p-6 text-center transform transition duration-300 hover:scale-105">
+        <div class="text-5xl font-bold text-white mb-2">
+          <span class="contador" data-target="90">0</span>%
+        </div>
+        <div class="text-blue-400 font-medium">Recomendaciones</div>
+      </div>
+    </div>
+
+    <!-- Primera fila de características - 3 elementos -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+      <!-- Característica 1: Garantía de Originalidad (primera ubicación, se reemplazará más tarde) -->
+      <div class="bg-slate-800/70 backdrop-blur-sm border border-slate-700/50 rounded-lg p-6 flex flex-col items-center md:items-start text-center md:text-left transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+        <div class="w-16 h-16 bg-blue-900/30 rounded-lg flex items-center justify-center mb-4 border border-blue-500/20">
+          <svg class="w-10 h-10 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold text-white mb-2">Entregas Puntuales</h3>
+        <p class="text-gray-300">Respetamos los plazos acordados y te mantenemos informado del progreso en cada etapa.</p>
+      </div>
+
+      <!-- Característica 2: Metodología Rigurosa -->
+      <div class="bg-slate-800/70 backdrop-blur-sm border border-slate-700/50 rounded-lg p-6 flex flex-col items-center md:items-start text-center md:text-left transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+        <div class="w-16 h-16 bg-blue-900/30 rounded-lg flex items-center justify-center mb-4 border border-blue-500/20">
+          <svg class="w-10 h-10 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path>
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold text-white mb-2">Metodología Rigurosa</h3>
+        <p class="text-gray-300">Aplicamos técnicas de investigación avanzadas acordes a los estándares académicos más exigentes.</p>
+      </div>
+
+      <!-- Característica 3: Almacenamiento Seguro -->
+      <div class="bg-slate-800/70 backdrop-blur-sm border border-slate-700/50 rounded-lg p-6 flex flex-col items-center md:items-start text-center md:text-left transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+        <div class="w-16 h-16 bg-blue-900/30 rounded-lg flex items-center justify-center mb-4 border border-blue-500/20">
+          <svg class="w-10 h-10 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"></path>
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold text-white mb-2">Almacenamiento Seguro</h3>
+        <p class="text-gray-300">Guardamos tus documentos de manera segura en la nube con respaldo continuo y acceso permanente.</p>
+      </div>
+    </div>
+
+    <!-- Segunda fila con distribución especial: 1/3 + 2/3 (Equipo Especializado + Garantía de Originalidad) -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <!-- Equipo Especializado - 1/3 de ancho -->
+      <div class="bg-slate-800/70 backdrop-blur-sm border border-slate-700/50 rounded-lg p-6 flex flex-col items-center md:items-start text-center md:text-left h-full">
+        <div class="w-16 h-16 bg-blue-900/30 rounded-lg flex items-center justify-center mb-4 border border-blue-500/20">
+          <svg class="w-10 h-10 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold text-white mb-2">Equipo Especializado</h3>
+        <p class="text-gray-300">Contamos con expertos en diversas disciplinas académicas con amplia experiencia en investigación.</p>
+      </div>
+
+      <!-- Garantía de Originalidad - 2/3 de ancho -->
+      <div class="md:col-span-2 bg-blue-900/40 backdrop-blur-sm border border-blue-700/30 rounded-lg overflow-hidden">
+        <div class="flex flex-col md:flex-row h-full">
+          <!-- Contenido izquierda (ícono) -->
+          <div class="bg-blue-900/60 p-8 flex items-center justify-center md:w-1/4">
+            <div class="w-24 h-24 rounded-full bg-blue-800/60 flex items-center justify-center border border-blue-400/30">
+              <svg class="w-12 h-12 text-blue-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+              </svg>
+            </div>
+          </div>
+          
+          <!-- Contenido derecha (texto) -->
+          <div class="p-6 md:p-8 md:w-3/4">
+            <h3 class="text-2xl font-bold text-white mb-4">Garantía de Originalidad</h3>
+            <p class="text-blue-100 mb-4">
+              Todos nuestros trabajos incluyen verificación con Turnitin, garantizando una tesis libre de plagio
+              y con aporte original a tu campo de estudio. Si tu trabajo no es aprobado por razones metodológicas,
+              te ofrecemos revisiones sin costo adicional hasta conseguir su aprobación.
+            </p>
+            <a href="/garantia" class="inline-flex items-center text-blue-300 hover:text-blue-200 font-medium">
+              Conoce nuestra garantía completa
+              <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // El mismo script para los contadores animados
+  document.addEventListener('DOMContentLoaded', () => {
+    const contadores = document.querySelectorAll('.contador');
+    let animacionIniciada = false;
+    
+    // Función para animar un contador
+    const animarContador = (contador, target) => {
+      let actual = 0;
+      const duracion = 2000;
+      const pasos = 60;
+      const incremento = target / pasos;
+      const intervalo = duracion / pasos;
+      
+      let timer = setInterval(() => {
+        actual += incremento;
+        contador.textContent = Math.floor(actual);
+        
+        if (actual >= target) {
+          contador.textContent = target;
+          clearInterval(timer);
+        }
+      }, intervalo);
+    };
+    
+    // Función para reiniciar contadores
+    const resetContadores = () => {
+      contadores.forEach(contador => {
+        contador.textContent = '0';
+      });
+    };
+    
+    // Usar IntersectionObserver para detectar cuando la sección es visible
+    const seccion = document.getElementById('por-que-elegirnos');
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !animacionIniciada) {
+          animacionIniciada = true;
+          
+          // Animar cada contador
+          contadores.forEach(contador => {
+            const target = parseInt(contador.getAttribute('data-target'));
+            animarContador(contador, target);
+          });
+        } else if (!entry.isIntersecting && animacionIniciada) {
+          animacionIniciada = false;
+          resetContadores();
+        }
+      });
+    }, { threshold: 0.2 });
+    
+    if (seccion) {
+      observer.observe(seccion);
+    }
+  });
+</script>

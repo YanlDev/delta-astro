@@ -1,0 +1,237 @@
+---
+
+---
+
+<section id="turnitin" class="py-20 bg-slate-900 relative overflow-hidden">
+  <!-- Elementos decorativos de fondo -->
+  <div class="absolute inset-0 opacity-10">
+    <div class="absolute top-1/4 -right-24 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply blur-2xl"></div>
+    <div class="absolute bottom-0 -left-24 w-72 h-72 bg-indigo-500 rounded-full mix-blend-multiply blur-2xl"></div>
+  </div>
+
+  <!-- Grid de fondo -->
+  <div class="absolute inset-0 opacity-5">
+    <div class="h-full w-full grid grid-cols-12 gap-1">
+      {Array(12).fill(0).map((_, i) => (
+        <div class="h-full border-r border-gray-300"></div>
+      ))}
+    </div>
+    <div class="h-full w-full grid grid-rows-6 gap-1">
+      {Array(6).fill(0).map((_, i) => (
+        <div class="w-full border-b border-gray-300"></div>
+      ))}
+    </div>
+  </div>
+
+  <div class="container mx-auto px-4 relative z-10">
+    <!-- Encabezado de la sección -->
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Revisión Turnitin</h2>
+      <p class="text-gray-300 max-w-3xl mx-auto">
+        Obtén un reporte de similitud en tan solo 5 minutos, sin depositar tu documento en la base de datos de Turnitin.
+        Verifica la originalidad de tu trabajo antes de la entrega final.
+      </p>
+      <div class="w-24 h-1 bg-gradient-to-r from-blue-600 to-indigo-600 mx-auto mt-6"></div>
+    </div>
+
+
+    <!-- Cards de precios -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+      <!-- Card 1: Reporte Único -->
+      <div class="relative group">
+        <!-- Borde con gradiente -->
+        <div class="absolute inset-0 rounded-xl p-0.5 bg-gradient-to-r from-blue-500 to-indigo-600"></div>
+        
+        <!-- Contenido de la tarjeta -->
+        <div class="bg-slate-800 rounded-xl p-6 h-full relative">
+          <div class="relative">
+            <!-- Badge de popularidad -->
+            <div class="absolute -top-8 -right-6 bg-blue-500 text-white px-3 py-1 rounded-full text-sm font-medium transform rotate-3 shadow-md">
+              Más Rápido
+            </div>
+            
+            <!-- Título -->
+            <h3 class="text-xl font-bold text-white mb-2 text-center">Reporte Único</h3>
+            
+            <!-- Precio -->
+            <div class="flex justify-center items-center my-6">
+              <span class="text-4xl font-bold text-white">S/7</span>
+              <span class="text-gray-400 ml-2 text-sm">por reporte</span>
+            </div>
+            
+            <!-- Características -->
+            <ul class="space-y-3 mb-8">
+              <li class="flex items-start">
+                <svg class="w-5 h-5 text-green-400 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                <span class="text-gray-300">Reporte en 5 minutos</span>
+              </li>
+              <li class="flex items-start">
+                <svg class="w-5 h-5 text-green-400 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                <span class="text-gray-300">Sin depósito en base de datos</span>
+              </li>
+              <li class="flex items-start">
+                <svg class="w-5 h-5 text-green-400 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                <span class="text-gray-300">Todos los formatos aceptados</span>
+              </li>
+              <li class="flex items-start">
+                <svg class="w-5 h-5 text-green-400 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                <span class="text-gray-300">Reporte completo PDF</span>
+              </li>
+            </ul>
+            
+            <!-- Botón -->
+            <a 
+              href="/comprar-reporte" 
+              class="block w-full py-3 px-4 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-medium rounded-lg text-center transition-all transform duration-300 hover:-translate-y-1 shadow-md hover:shadow-lg"
+            >
+              Solicitar Reporte
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Card 2: Pack 3 Reportes (Popular) -->
+      <div class="relative group transform scale-105 z-10">
+        <!-- Borde con gradiente -->
+        <div class="absolute inset-0 rounded-xl p-0.5 bg-gradient-to-r from-purple-500 to-pink-500"></div>
+        
+        <!-- Contenido de la tarjeta -->
+        <div class="bg-slate-800 rounded-xl p-6 h-full relative">
+          <div class="relative">
+            <!-- Badge de popularidad -->
+            <div class="absolute -top-8 -right-6 bg-pink-500 text-white px-3 py-1 rounded-full text-sm font-medium transform rotate-3 shadow-md">
+              Más Popular
+            </div>
+            
+            <!-- Título -->
+            <h3 class="text-xl font-bold text-white mb-2 text-center">Pack 3 Reportes</h3>
+            
+            <!-- Precio -->
+            <div class="flex justify-center items-center my-6">
+              <span class="text-4xl font-bold text-white">S/15</span>
+              <span class="text-gray-400 ml-2 text-sm">por 3 reportes</span>
+            </div>
+            
+            <!-- Características -->
+            <ul class="space-y-3 mb-8">
+              <li class="flex items-start">
+                <svg class="w-5 h-5 text-green-400 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                <span class="text-gray-300">3 reportes por el precio de 2</span>
+              </li>
+              <li class="flex items-start">
+                <svg class="w-5 h-5 text-green-400 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                <span class="text-gray-300">Sin depósito en base de datos</span>
+              </li>
+              <li class="flex items-start">
+                <svg class="w-5 h-5 text-green-400 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                <span class="text-gray-300">Válido para diferentes versiones</span>
+              </li>
+              <li class="flex items-start">
+                <svg class="w-5 h-5 text-green-400 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                <span class="text-gray-300">Reporte completo PDF</span>
+              </li>
+              <li class="flex items-start">
+                <svg class="w-5 h-5 text-green-400 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                <span class="text-gray-300"><span class="font-bold text-white">AHORRO 28%</span> sobre precio individual</span>
+              </li>
+            </ul>
+            
+            <!-- Botón -->
+            <a 
+              href="/comprar-pack" 
+              class="block w-full py-3 px-4 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-medium rounded-lg text-center transition-all transform duration-300 hover:-translate-y-1 shadow-md hover:shadow-lg"
+            >
+              Obtener Pack
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Card 3: Servicio de Parafraseo -->
+      <div class="relative group">
+        <!-- Borde con gradiente -->
+        <div class="absolute inset-0 rounded-xl p-0.5 bg-gradient-to-r from-cyan-500 to-teal-500"></div>
+        
+        <!-- Contenido de la tarjeta -->
+        <div class="bg-slate-800 rounded-xl p-6 h-full relative">
+          <div class="relative">
+            <!-- Badge de popularidad -->
+            <div class="absolute -top-8 -right-6 bg-teal-500 text-white px-3 py-1 rounded-full text-sm font-medium transform rotate-3 shadow-md">
+              Premium
+            </div>
+            
+            <!-- Título -->
+            <h3 class="text-xl font-bold text-white mb-2 text-center">Servicio de Parafraseo</h3>
+            
+            <!-- Precio -->
+            <div class="flex justify-center items-center my-6">
+              <span class="text-2xl font-bold py-1 px-4 rounded-lg bg-gradient-to-r from-teal-600 to-cyan-600 text-white">Cotiza Ya!</span>
+            </div>
+            
+            <!-- Características -->
+            <ul class="space-y-3 mb-8">
+              <li class="flex items-start">
+                <svg class="w-5 h-5 text-green-400 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                <span class="text-gray-300">Reducción del % de similitud</span>
+              </li>
+              <li class="flex items-start">
+                <svg class="w-5 h-5 text-green-400 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                <span class="text-gray-300">Parafraseo profesional</span>
+              </li>
+              <li class="flex items-start">
+                <svg class="w-5 h-5 text-green-400 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                <span class="text-gray-300">Ajuste al % deseado</span>
+              </li>
+              <li class="flex items-start">
+                <svg class="w-5 h-5 text-green-400 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                <span class="text-gray-300">Mantiene la calidad académica</span>
+              </li>
+              <li class="flex items-start">
+                <svg class="w-5 h-5 text-green-400 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+                <span class="text-gray-300">Incluye reporte Turnitin</span>
+              </li>
+            </ul>
+            
+            <!-- Botón -->
+            <a 
+              href="/cotizar-parafraseo" 
+              class="block w-full py-3 px-4 bg-gradient-to-r from-teal-600 to-cyan-600 hover:from-teal-700 hover:to-cyan-700 text-white font-medium rounded-lg text-center transition-all transform duration-300 hover:-translate-y-1 shadow-md hover:shadow-lg"
+            >
+              Solicitar Cotización
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</section>

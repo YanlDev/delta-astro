@@ -1,0 +1,38 @@
+---
+// StepCard.astro - Componente para cada paso individual
+export interface Props {
+  numero: string | number;
+  titulo: string;
+  descripcion: string;
+  icono: string;
+  colorIcono?: string;
+}
+
+const {
+  numero,
+  titulo,
+  descripcion,
+  icono,
+  colorIcono = "text-blue-400"
+} = Astro.props;
+---
+
+<div class="relative">
+  <!-- Tarjeta (z-index menor) -->
+  <div class="bg-slate-800/70 backdrop-blur-sm border border-slate-700/50 rounded-lg p-6 pt-12 relative z-0 h-full transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+    <div class="flex items-center mb-4">
+      <div class="w-14 h-14 bg-blue-900/30 rounded-lg flex items-center justify-center mr-4 border border-blue-500/20">
+        <svg class={`w-10 h-10 ${colorIcono}`} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <Fragment set:html={icono} />
+        </svg>
+      </div>
+      <h3 class="text-xl font-bold text-white">{titulo}</h3>
+    </div>
+    <p class="text-gray-300">{descripcion}</p>
+  </div>
+  
+  <!-- Número grande (z-index mayor) -->
+  <div class="absolute -top-16 -left-2 text-9xl font-bold text-gray-500/70 select-none z-20">
+    {numero}
+  </div>
+</div>
