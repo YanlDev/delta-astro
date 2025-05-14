@@ -1,0 +1,60 @@
+name: Deploy Astro site to GitHub Pages
+
+on:
+  # Ejecuta en push a la rama principal
+  push:
+    branches: ["main"]  # Cambia a tu rama principal si usas otra diferente
+  
+  # Permite ejecutar manualmente desde la pestaña Actions
+  workflow_dispatch:
+
+# Establece los permisos necesarios para el despliegue de GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Solo permite una ejecución concurrente
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Build with Astro
+        run: npm run build
+      
+      - name: Create .nojekyll file
+        run: touch dist/.nojekyll
+      
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: dist
+
+  deploy:
+    name: Deploy
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
