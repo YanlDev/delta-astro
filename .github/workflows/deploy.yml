@@ -10,18 +10,13 @@ on:
 
 # Establece los permisos necesarios para el despliegue de GitHub Pages
 permissions:
-  contents: read
+  contents: write  # Cambiado a write para permitir push a gh-pages
   pages: write
   id-token: write
 
-# Solo permite una ejecución concurrente
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
-
 jobs:
-  build:
-    name: Build
+  build-and-deploy:
+    name: Build and Deploy
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -42,19 +37,9 @@ jobs:
       - name: Create .nojekyll file
         run: touch dist/.nojekyll
       
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1  # Cambiado de v2 a v1
-        with:
-          path: dist
-
-  deploy:
-    name: Deploy
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
+      # Usaremos JamesIves/github-pages-deploy-action en lugar de actions/upload-pages-artifact
       - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v1  # Cambiado de v2 a v1
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: dist
+          branch: gh-pages
