@@ -1,11 +1,54 @@
 ---
-import pregradoImage from "../../assets/img/pregrado.png";
-import posgradoImage from "../../assets/img/posgrado.png";
-import practicasImage from "../../assets/img/practicas.png";
+import ServiceCard from "../components/ServiceCard.astro";
+
+// Importar imágenes para cada servicio
+import pregradoImage from "../../assets/img/services/pregrado.png";
+import posgradoImage from "../../assets/img/services/posgrado.png";
+import practicasImage from "../../assets/img/services/practicas.png";
+
+// Definir servicios destacados para la página de inicio
+const highlightedServices = [
+  {
+    title: "Tesis de Pregrado",
+    description: "Desarrollamos tesis de licenciatura con metodología rigurosa y adaptada a los requisitos específicos de tu universidad.",
+    features: [
+      "Marco teórico actualizado",
+      "Metodología personalizada",
+      "Asesoría en la defensa"
+    ],
+    imageSrc: pregradoImage.src,
+    colorClass: "from-blue-600 to-indigo-600",
+    href: "/servicios/pregrado"
+  },
+  {
+    title: "Tesis de Posgrado",
+    description: "Investigación avanzada para maestrías y doctorados con profundidad académica y aportes significativos a tu campo.",
+    features: [
+      "Investigación exhaustiva",
+      "Análisis estadístico avanzado",
+      "Publicaciones científicas"
+    ],
+    imageSrc: posgradoImage.src,
+    colorClass: "from-indigo-600 to-purple-600",
+    href: "/servicios/posgrado"
+  },
+  {
+    title: "Informes de Prácticas",
+    description: "Elaboramos informes profesionales que destacan tus competencias y logros durante tu experiencia práctica.",
+    features: [
+      "Estructura profesional",
+      "Documentación de actividades",
+      "Entregas rápidas"
+    ],
+    imageSrc: practicasImage.src,
+    colorClass: "from-blue-500 to-teal-500",
+    href: "/servicios/informes"
+  }
+];
 ---
 
 <section id="servicios" class="py-20 bg-slate-900 relative overflow-hidden">
-  {/* Elementos decorativos de fondo (similares al Hero) */}
+  {/* Elementos decorativos de fondo */}
   <div class="absolute inset-0 opacity-10">
     <div
       class="absolute -top-24 -right-24 w-96 h-96 bg-indigo-500 rounded-full mix-blend-multiply blur-2xl"
@@ -21,7 +64,7 @@ import practicasImage from "../../assets/img/practicas.png";
     </div>
   </div>
 
-  {/* Grid de fondo (igual que el Hero) */}
+  {/* Grid de fondo */}
   <div class="absolute inset-0 opacity-5">
     <div class="h-full w-full grid grid-cols-12 gap-1">
       {
@@ -52,330 +95,19 @@ import practicasImage from "../../assets/img/practicas.png";
       <div class="w-24 h-1 bg-blue-600 mx-auto mt-6"></div>
     </div>
 
-    {/* Tarjetas de servicios */}
+    {/* Tarjetas de servicios usando el componente ServiceCard */}
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-      {/* Servicio 1: Tesis de Pregrado */}
-      <div
-        class="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-lg overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
-      >
-        <div class="bg-gradient-to-r from-blue-600 to-indigo-600 h-2"></div>
-        <div class="p-6 flex flex-col flex-grow">
-          <div
-            class="h-48 bg-indigo-900/50 rounded-lg flex items-center justify-center mb-6 mx-auto md:mx-0 border border-indigo-500/30 overflow-hidden"
-          >
-            <img
-              src={pregradoImage.src}
-              alt="Imagen de graduados"
-              class="w-full h-full object-cover rounded-lg"
-            />
-          </div>
-          <h3
-            class="text-xl font-bold text-white mb-3 text-center md:text-left"
-          >
-            Tesis de Pregrado
-          </h3>
-          <p class="text-blue-100 mb-4 text-center md:text-left">
-            Desarrollamos tesis de licenciatura con metodología rigurosa y
-            adaptada a los requisitos específicos de tu universidad.
-          </p>
-          <div class="space-y-2 mb-6">
-            <div class="flex items-center">
-              <svg
-                class="w-5 h-5 text-green-400 mr-2"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M5 13l4 4L19 7"></path>
-              </svg>
-              <span class="text-sm text-gray-300"
-                >Marco teórico actualizado</span
-              >
-            </div>
-            <div class="flex items-center">
-              <svg
-                class="w-5 h-5 text-green-400 mr-2"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M5 13l4 4L19 7"></path>
-              </svg>
-              <span class="text-sm text-gray-300"
-                >Metodología personalizada</span
-              >
-            </div>
-            <div class="flex items-center">
-              <svg
-                class="w-5 h-5 text-green-400 mr-2"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M5 13l4 4L19 7"></path>
-              </svg>
-              <span class="text-sm text-gray-300">Asesoría en la defensa</span>
-            </div>
-          </div>
-          <div
-            class="flex flex-col sm:flex-row items-center justify-between pt-4 border-t border-blue-900/50"
-          >
-            <div class="flex items-center mb-3 sm:mb-0">
-              <div class="text-sm text-blue-400">Desde</div>
-              <div class="text-xl font-bold text-white ml-1">$XXX</div>
-            </div>
-            <a
-              href="/servicios/pregrado"
-              class="text-blue-400 hover:text-blue-300 text-sm font-medium flex items-center transition-colors"
-            >
-              Más información
-              <svg
-                class="w-4 h-4 ml-1"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M9 5l7 7-7 7"></path>
-              </svg>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      {/* Servicio 2: Tesis de Posgrado */}
-      <div
-        class="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-lg overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
-      >
-        <div class="bg-gradient-to-r from-indigo-600 to-purple-600 h-2"></div>
-        <div class="p-6 flex flex-col flex-grow">
-          <div
-            class="h-48 bg-blue-900/50 rounded-lg flex items-center justify-center mb-6 mx-auto md:mx-0 border border-blue-500/30 overflow-hidden"
-          >
-            <img
-              src={posgradoImage.src}
-              alt="Estudiante posgrado"
-              class="w-full h-full object-cover rounded-lg"
-            />
-          </div>
-          <h3
-            class="text-xl font-bold text-white mb-3 text-center md:text-left"
-          >
-            Tesis de Posgrado
-          </h3>
-          <p class="text-blue-100 mb-4 text-center md:text-left">
-            Investigación avanzada para maestrías y doctorados con profundidad
-            académica y aportes significativos a tu campo.
-          </p>
-          <div class="space-y-2 mb-6">
-            <div class="flex items-center">
-              <svg
-                class="w-5 h-5 text-green-400 mr-2"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M5 13l4 4L19 7"></path>
-              </svg>
-              <span class="text-sm text-gray-300">Investigación exhaustiva</span
-              >
-            </div>
-            <div class="flex items-center">
-              <svg
-                class="w-5 h-5 text-green-400 mr-2"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M5 13l4 4L19 7"></path>
-              </svg>
-              <span class="text-sm text-gray-300"
-                >Análisis estadístico avanzado</span
-              >
-            </div>
-            <div class="flex items-center">
-              <svg
-                class="w-5 h-5 text-green-400 mr-2"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M5 13l4 4L19 7"></path>
-              </svg>
-              <span class="text-sm text-gray-300"
-                >Publicaciones científicas</span
-              >
-            </div>
-          </div>
-          <div
-            class="flex flex-col sm:flex-row items-center justify-between pt-4 border-t border-indigo-900/50"
-          >
-            <div class="flex items-center mb-3 sm:mb-0">
-              <div class="text-sm text-indigo-400">Desde</div>
-              <div class="text-xl font-bold text-white ml-1">$XXX</div>
-            </div>
-            <a
-              href="/servicios/posgrado"
-              class="text-indigo-400 hover:text-indigo-300 text-sm font-medium flex items-center transition-colors"
-            >
-              Más información
-              <svg
-                class="w-4 h-4 ml-1"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M9 5l7 7-7 7"></path>
-              </svg>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      {/* Servicio 3: Informes de Prácticas */}
-      <div
-        class="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-lg overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
-      >
-        <div class="bg-gradient-to-r from-blue-500 to-teal-500 h-2"></div>
-        <div class="p-6 flex flex-col flex-grow">
-          <div
-            class="h-48 bg-blue-900/50 rounded-lg flex items-center justify-center mb-6 mx-auto md:mx-0 border border-teal-500/30 overflow-hidden"
-          >
-            <img
-              src={practicasImage.src}
-              alt="Estudiante practicas"
-              class="w-full h-full object-cover rounded-lg"
-            />
-          </div>
-          <h3
-            class="text-xl font-bold text-white mb-3 text-center md:text-left"
-          >
-            Informes de Prácticas
-          </h3>
-          <p class="text-blue-100 mb-4 text-center md:text-left">
-            Elaboramos informes profesionales que destacan tus competencias y
-            logros durante tu experiencia práctica.
-          </p>
-          <div class="space-y-2 mb-6">
-            <div class="flex items-center">
-              <svg
-                class="w-5 h-5 text-green-400 mr-2"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M5 13l4 4L19 7"></path>
-              </svg>
-              <span class="text-sm text-gray-300">Estructura profesional</span>
-            </div>
-            <div class="flex items-center">
-              <svg
-                class="w-5 h-5 text-green-400 mr-2"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M5 13l4 4L19 7"></path>
-              </svg>
-              <span class="text-sm text-gray-300"
-                >Documentación de actividades</span
-              >
-            </div>
-            <div class="flex items-center">
-              <svg
-                class="w-5 h-5 text-green-400 mr-2"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M5 13l4 4L19 7"></path>
-              </svg>
-              <span class="text-sm text-gray-300">Entregas rápidas</span>
-            </div>
-          </div>
-          <div
-            class="flex flex-col sm:flex-row items-center justify-between pt-4 border-t border-teal-900/50"
-          >
-            <div class="flex items-center mb-3 sm:mb-0">
-              <div class="text-sm text-teal-400">Desde</div>
-              <div class="text-xl font-bold text-white ml-1">$XXX</div>
-            </div>
-            <a
-              href="/servicios/informes"
-              class="text-teal-400 hover:text-teal-300 text-sm font-medium flex items-center transition-colors"
-            >
-              Más información
-              <svg
-                class="w-4 h-4 ml-1"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M9 5l7 7-7 7"></path>
-              </svg>
-            </a>
-          </div>
-        </div>
-      </div>
+      {highlightedServices.map((service) => (
+        <ServiceCard
+          title={service.title}
+          description={service.description}
+          features={service.features}
+          imageSrc={service.imageSrc}
+          price={service.price}
+          colorClass={service.colorClass}
+          href={service.href}
+        />
+      ))}
     </div>
 
     {/* Botón de ver todos los servicios */}
@@ -402,8 +134,3 @@ import practicasImage from "../../assets/img/practicas.png";
     </div>
   </div>
 </section>
-
-<script>
-  // Se puede añadir alguna lógica de animación si lo deseas
-  // Por ejemplo, mostrar las tarjetas con una animación al hacer scroll
-</script>

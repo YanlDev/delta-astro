@@ -1,0 +1,212 @@
+---
+// Importar Layout y ServiceCard
+import Layout from "../layouts/Layout.astro";
+import ServiceCard from "../layouts/components/ServiceCard.astro";
+
+// Importar imágenes para cada servicio
+import pregradoImage from "../assets/img/services/pregrado.png";
+import posgradoImage from "../assets/img/services/posgrado.png";
+import articuloImage from "../assets/img/services/articulo.png";
+import monografiasImage from "../assets/img/services/monografia.png";
+import practicasImage from "../assets/img/services/practicas.png";
+import observacionesImage from "../assets/img/services/observaciones.png";
+import turnitinImage from "../assets/img/services/turnitin.png";
+import parafraseoImage from "../assets/img/services/parafraseo.png";
+import consultaImage from "../assets/img/services/consulta.png";
+
+// Definir la información de servicios
+const services = [
+  {
+    title: "Redacción de Tesis de Posgrado",
+    description: "Investigación avanzada para maestrías y doctorados con profundidad académica y aportes significativos a tu campo.",
+    features: [
+      "Investigación exhaustiva",
+      "Análisis estadístico avanzado",
+      "Publicaciones científicas"
+    ],
+    imageSrc: posgradoImage.src,
+    displayType: "quote",
+    colorClass: "from-indigo-600 to-purple-600",
+    buttonColor: "from-indigo-600 to-purple-600",
+    href: "/servicios/posgrado"
+  },
+  {
+    title: "Redacción de Tesis de Pregrado",
+    description: "Desarrollamos tesis de licenciatura con metodología rigurosa y adaptada a los requisitos específicos de tu universidad.",
+    features: [
+      "Marco teórico actualizado",
+      "Metodología personalizada",
+      "Asesoría en la defensa"
+    ],
+    imageSrc: pregradoImage.src,
+    displayType: "quote",
+    colorClass: "from-blue-600 to-indigo-600",
+    buttonColor: "from-blue-600 to-indigo-600",
+    href: "/servicios/pregrado"
+  },
+  {
+    title: "Artículo Científico",
+    description: "Redacción de artículos académicos con estructura y metodología científica para publicación en revistas indexadas.",
+    features: [
+      "Estructura IMRyD",
+      "Revisión bibliográfica",
+      "Adaptación a normas de publicación"
+    ],
+    imageSrc: articuloImage.src,
+    displayType: "quote",
+    colorClass: "from-purple-600 to-pink-600",
+    buttonColor: "from-purple-600 to-pink-600",
+    href: "/servicios/articulo"
+  },
+  {
+    title: "Monografías",
+    description: "Desarrollo de monografías académicas con investigación bibliográfica completa y análisis profundo del tema.",
+    features: [
+      "Investigación temática",
+      "Estructura académica",
+      "Referencias actualizadas"
+    ],
+    imageSrc: monografiasImage.src,
+    displayType: "quote",
+    colorClass: "from-pink-600 to-red-600",
+    buttonColor: "from-pink-600 to-red-600",
+    href: "/servicios/monografias"
+  },
+  {
+    title: "Informes de Prácticas",
+    description: "Elaboramos informes profesionales que destacan tus competencias y logros durante tu experiencia práctica.",
+    features: [
+      "Estructura profesional",
+      "Documentación de actividades",
+      "Entregas rápidas"
+    ],
+    imageSrc: practicasImage.src,
+    displayType: "quote",
+    colorClass: "from-blue-500 to-teal-500",
+    buttonColor: "from-blue-500 to-teal-500",
+    href: "/servicios/informes"
+  },
+  {
+    title: "Levantamiento de Observaciones",
+    description: "Soluciones efectivas para resolver observaciones metodológicas o formales en tus trabajos académicos.",
+    features: [
+      "Revisión detallada",
+      "Ajustes metodológicos",
+      "Mejora de resultados"
+    ],
+    imageSrc: observacionesImage.src,
+    displayType: "quote",
+    colorClass: "from-orange-500 to-amber-500",
+    buttonColor: "from-orange-500 to-amber-500",
+    href: "/servicios/observaciones"
+  },
+  {
+    title: "Revisión Turnitin",
+    description: "Obtén un reporte de similitud en tiempo récord sin depositar tu documento en la base de datos de Turnitin.",
+    features: [
+      "Reporte en 5 minutos",
+      "Sin depósito en base de datos",
+      "Reporte completo PDF"
+    ],
+    imageSrc: turnitinImage.src,
+    displayType: "price",
+    price: "S/7",
+    colorClass: "from-blue-600 to-sky-500",
+    href: "/turnitin"
+  },
+  {
+    title: "Parafraseo Profesional",
+    description: "Reducción del porcentaje de similitud manteniendo la calidad académica y el significado original del texto.",
+    features: [
+      "Reducción del % de similitud",
+      "Parafraseo profesional",
+      "Mantiene la calidad académica"
+    ],
+    imageSrc: parafraseoImage.src,
+    displayType: "quote",
+    colorClass: "from-teal-600 to-cyan-600",
+    buttonColor: "from-teal-600 to-cyan-600",
+    href: "/servicios/parafraseo"
+  }
+];
+---
+
+<Layout title="Nuestros Servicios | Delta Soluciones Académicas">
+  <section class="py-20 bg-slate-900 relative overflow-hidden">
+    <!-- Elementos decorativos de fondo -->
+    <div class="absolute inset-0 opacity-10">
+      <div class="absolute top-1/4 -right-24 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply blur-2xl"></div>
+      <div class="absolute bottom-0 -left-24 w-72 h-72 bg-indigo-500 rounded-full mix-blend-multiply blur-2xl"></div>
+    </div>
+
+    <!-- Grid de fondo -->
+    <div class="absolute inset-0 opacity-5">
+      <div class="h-full w-full grid grid-cols-12 gap-1">
+        {Array(12).fill(0).map((_, i) => (
+          <div class="h-full border-r border-gray-300"></div>
+        ))}
+      </div>
+      <div class="h-full w-full grid grid-rows-6 gap-1">
+        {Array(6).fill(0).map((_, i) => (
+          <div class="w-full border-b border-gray-300"></div>
+        ))}
+      </div>
+    </div>
+
+    <div class="container mx-auto px-4 relative z-10">
+      <!-- Encabezado de la sección -->
+      <div class="text-center mb-16">
+        <h1 class="text-3xl md:text-4xl font-bold text-white mb-4">Nuestros Servicios Académicos</h1>
+        <p class="text-gray-300 max-w-3xl mx-auto">
+          Ofrecemos soluciones académicas profesionales adaptadas a tus necesidades específicas.
+          Todos nuestros servicios garantizan calidad, originalidad y cumplimiento de plazos.
+        </p>
+        <div class="w-24 h-1 bg-gradient-to-r from-blue-600 to-indigo-600 mx-auto mt-6"></div>
+      </div>
+
+      <!-- Grid de servicios -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+        {services.map((service) => (
+          <ServiceCard
+            title={service.title}
+            description={service.description}
+            features={service.features}
+            imageSrc={service.imageSrc}
+            displayType={service.displayType}
+            price={service.price}
+            colorClass={service.colorClass}
+            buttonColor={service.buttonColor}
+            href={service.href}
+          />
+        ))}
+
+        <!-- Consulta Especializada -->
+        <ServiceCard
+          title="Consulta Especializada"
+          description="¿No encuentras el servicio que necesitas? Contáctanos para una consulta personalizada y desarrollaremos una solución a medida."
+          features={[
+            "Asesoría inicial gratuita",
+            "Soluciones personalizadas",
+            "Respuesta en 24h"
+          ]}
+          imageSrc={consultaImage.src}
+          displayType="quote"
+          colorClass="from-gray-600 to-slate-600"
+          buttonColor="from-gray-600 to-slate-600"
+          href="/contacto"
+          buttonText="Solicitar Consulta"
+        />
+      </div>
+
+      <!-- CTA sección como ServiceCard -->
+      <ServiceCard
+        title="¿Necesitas asesoría personalizada?"
+        description="Nuestro equipo de especialistas está listo para ayudarte con cualquier proyecto académico. Ofrecemos una primera consulta gratuita para evaluar tus necesidades."
+        displayType="cta"
+        href="/contacto"
+        buttonText="Contáctanos Ahora"
+        fullWidth={true}
+      />
+    </div>
+  </section>
+</Layout>

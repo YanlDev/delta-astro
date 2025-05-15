@@ -1,0 +1,28 @@
+---
+import Navbar from "./Navbar.astro";
+import Footer from "./Footer.astro";
+import "../styles/global.css";
+
+export interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <script
+      src="https://kit.fontawesome.com/e1238f483a.js"
+      crossorigin="anonymous"></script>
+    <title>{title}</title>
+  </head>
+  <body class="bg-slate-900">
+    <Navbar />
+    <slot />
+    <Footer />
+  </body>
+</html>
