@@ -1,11 +1,24 @@
-// src/scripts/telegram-api.js - Actualizado para pack de 3
+// src/scripts/telegram-api.js - VERSIÓN CORREGIDA
 export class TelegramAPI {
   constructor() {
-    // Configuración del bot - mover a variables de entorno en producción
+    // Obtener credenciales de variables de entorno o configuración
     this.config = {
-      botToken: '',
-      chatId: ''
+      botToken: import.meta.env.PUBLIC_TELEGRAM_BOT_TOKEN || this.getFromWindow('TELEGRAM_BOT_TOKEN'),
+      chatId: import.meta.env.PUBLIC_TELEGRAM_CHAT_ID || this.getFromWindow('TELEGRAM_CHAT_ID')
     };
+    
+    // Configuración de respaldo para desarrollo
+    if (!this.config.botToken || !this.config.chatId) {
+      console.warn('⚠️ Credenciales de Telegram no configuradas. Usando modo simulación.');
+      this.simulationMode = true;
+    } else {
+      this.simulationMode = false;
+    }
+  }
+
+  // Método auxiliar para obtener variables del objeto window
+  getFromWindow(varName) {
+    return typeof window !== 'undefined' && window[varName] ? window[varName] : '';
   }
 
   /**
@@ -13,7 +26,24 @@ export class TelegramAPI {
    * @param {Object} formData - Datos del formulario
    */
   async sendFormData(formData) {
+    // Modo simulación para desarrollo
+    if (this.simulationMode) {
+      console.log('📨 MODO SIMULACIÓN - Datos del formulario:', formData);
+      
+      // Simular delay de red
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      
+      // Simular éxito
+      console.log('✅ Formulario enviado exitosamente (simulación)');
+      return { ok: true, message: 'Simulación exitosa' };
+    }
+
     try {
+      // Validar configuración antes de enviar
+      if (!this.validateConfig()) {
+        throw new Error('Configuración de Telegram inválida');
+      }
+
       // Enviar mensaje principal
       await this.sendMessage(this.formatMessage(formData));
       
@@ -42,9 +72,11 @@ export class TelegramAPI {
         );
       }
       
+      return { ok: true, message: 'Enviado correctamente' };
+      
     } catch (error) {
-      console.error('Error en TelegramAPI:', error);
-      throw new Error('Error al enviar los datos a Telegram');
+      console.error('❌ Error en TelegramAPI:', error);
+      throw new Error(`Error al enviar los datos: ${error.message}`);
     }
   }
 
@@ -123,14 +155,14 @@ ${formData.mensaje || 'Sin mensaje adicional'}
   async sendDocument(file, caption) {
     const url = `https://api.telegram.org/bot${this.config.botToken}/sendDocument`;
     
-    const formData = new FormData();
-    formData.append('chat_id', this.config.chatId);
-    formData.append('document', file);
-    formData.append('caption', caption);
+    const formDataToSend = new FormData();
+    formDataToSend.append('chat_id', this.config.chatId);
+    formDataToSend.append('document', file);
+    formDataToSend.append('caption', caption);
     
     const response = await fetch(url, {
       method: 'POST',
-      body: formData
+      body: formDataToSend
     });
     
     if (!response.ok) {
@@ -149,14 +181,14 @@ ${formData.mensaje || 'Sin mensaje adicional'}
   async sendPhoto(file, caption) {
     const url = `https://api.telegram.org/bot${this.config.botToken}/sendPhoto`;
     
-    const formData = new FormData();
-    formData.append('chat_id', this.config.chatId);
-    formData.append('photo', file);
-    formData.append('caption', caption);
+    const formDataToSend = new FormData();
+    formDataToSend.append('chat_id', this.config.chatId);
+    formDataToSend.append('photo', file);
+    formDataToSend.append('caption', caption);
     
     const response = await fetch(url, {
       method: 'POST',
-      body: formData
+      body: formDataToSend
     });
     
     if (!response.ok) {
@@ -172,16 +204,17 @@ ${formData.mensaje || 'Sin mensaje adicional'}
    * @returns {boolean} - True si la configuración es válida
    */
   validateConfig() {
-    if (!this.config.botToken || this.config.botToken === 'TU_BOT_TOKEN_AQUI') {
-      console.error('❌ Bot token no configurado');
+    if (!this.config.botToken || this.config.botToken.length < 10) {
+      console.error('❌ Bot token no configurado o inválido');
       return false;
     }
     
-    if (!this.config.chatId || this.config.chatId === 'TU_CHAT_ID_AQUI') {
-      console.error('❌ Chat ID no configurado');
+    if (!this.config.chatId || this.config.chatId.length < 5) {
+      console.error('❌ Chat ID no configurado o inválido');
       return false;
     }
     
+    console.log('✅ Configuración de Telegram válida');
     return true;
   }
 
@@ -193,5 +226,7 @@ ${formData.mensaje || 'Sin mensaje adicional'}
   setConfig(botToken, chatId) {
     this.config.botToken = botToken;
     this.config.chatId = chatId;
+    this.simulationMode = false;
+    console.log('🔧 Configuración de Telegram actualizada');
   }
 }
