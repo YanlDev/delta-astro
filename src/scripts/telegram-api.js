@@ -1,3 +1,4 @@
+// src/scripts/telegram-api.js - Actualizado para pack de 3
 export class TelegramAPI {
   constructor() {
     // Configuración del bot - mover a variables de entorno en producción
@@ -16,15 +17,24 @@ export class TelegramAPI {
       // Enviar mensaje principal
       await this.sendMessage(this.formatMessage(formData));
       
-      // Enviar documento si existe
-      if (formData.documento) {
+      // Enviar documentos (soporte para múltiples archivos)
+      if (formData.documentos && formData.documentos.length > 0) {
+        for (let i = 0; i < formData.documentos.length; i++) {
+          const documento = formData.documentos[i];
+          await this.sendDocument(
+            documento, 
+            `Documento ${i + 1}/${formData.documentos.length} - ${formData.nombre} ${formData.apellidos}`
+          );
+        }
+      } else if (formData.documento) {
+        // Compatibilidad con versión anterior
         await this.sendDocument(
           formData.documento, 
           `Documento de ${formData.nombre} ${formData.apellidos}`
         );
       }
       
-      // Enviar imagen si existe
+      // Enviar imagen de pago si existe
       if (formData.imagenPago) {
         await this.sendPhoto(
           formData.imagenPago, 
@@ -51,6 +61,9 @@ export class TelegramAPI {
     const metodoEntregaText = formData.metodoEntrega === 'whatsapp' 
       ? 'WhatsApp' 
       : 'Correo Electrónico';
+
+    // Contar documentos
+    const numDocumentos = formData.documentos ? formData.documentos.length : (formData.documento ? 1 : 0);
     
     return `
 🆕 *NUEVA SOLICITUD DE REVISIÓN TURNITIN*
@@ -64,12 +77,12 @@ export class TelegramAPI {
 • Tipo: ${tipoReporteText}
 • Entrega por: ${metodoEntregaText}
 
+📄 *Archivos:*
+• Documentos: ${numDocumentos} archivo(s)
+• Comprobante: ${formData.imagenPago ? '✅ Adjuntado' : '❌ No adjuntado'}
+
 💬 *Mensaje Adicional:*
 ${formData.mensaje || 'Sin mensaje adicional'}
-
-📄 *Archivos:*
-• Documento: ${formData.documento ? formData.documento.name : 'No adjuntado'}
-• Comprobante: ${formData.imagenPago ? formData.imagenPago.name : 'No adjuntado'}
 
 ⏰ *Fecha:* ${new Date().toLocaleString('es-PE')}
     `.trim();
