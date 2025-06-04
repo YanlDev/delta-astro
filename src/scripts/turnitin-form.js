@@ -1,4 +1,4 @@
-// src/scripts/turnitin-form.js - VERSIÓN CORREGIDA Y OPTIMIZADA
+// src/scripts/turnitin-form.js - Versión CORREGIDA para navegación
 
 // Importar clases (solo cuando estén disponibles)
 let TelegramAPI, FormUtils;
@@ -71,7 +71,7 @@ export class TurnitinForm {
         alertDiv.className = `fixed top-4 right-4 z-50 max-w-sm bg-slate-800 border-l-4 ${alertClass} rounded-lg shadow-lg p-4`;
         alertDiv.innerHTML = `
           <div class="flex justify-between items-center">
-            <span>${message}</span>
+            <span class="text-sm">${message}</span>
             <button onclick="this.parentElement.parentElement.remove()" class="ml-4 text-gray-400 hover:text-white">×</button>
           </div>
         `;
@@ -92,7 +92,7 @@ export class TurnitinForm {
           return false;
         }
 
-        if (file.size > 10 * 1024 * 1024) { // 10MB
+        if (file.size > 10 * 1024 * 1024) {
           this.showAlert('El documento no debe superar los 10MB', 'error');
           return false;
         }
@@ -106,7 +106,7 @@ export class TurnitinForm {
           return false;
         }
 
-        if (file.size > 5 * 1024 * 1024) { // 5MB
+        if (file.size > 5 * 1024 * 1024) {
           this.showAlert('La imagen no debe superar los 5MB', 'error');
           return false;
         }
@@ -125,7 +125,7 @@ export class TurnitinForm {
       setButtonLoading: (button, isLoading, originalText = null) => {
         if (isLoading) {
           button.innerHTML = `
-            <svg class="animate-spin w-5 h-5 mr-2 inline" fill="none" viewBox="0 0 24 24">
+            <svg class="animate-spin w-4 h-4 mr-2 inline" fill="none" viewBox="0 0 24 24">
               <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
               <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
             </svg>
@@ -144,34 +144,30 @@ export class TurnitinForm {
     console.log('🔗 Vinculando eventos...');
 
     // Navegación entre pasos
-    document.querySelectorAll('.next-btn').forEach(btn => {
-      btn.addEventListener('click', (e) => {
+    document.addEventListener('click', (e) => {
+      if (e.target.classList.contains('next-btn') || e.target.closest('.next-btn')) {
         e.preventDefault();
         this.nextStep();
-      });
-    });
+      }
 
-    document.querySelectorAll('.prev-btn').forEach(btn => {
-      btn.addEventListener('click', (e) => {
+      if (e.target.classList.contains('prev-btn') || e.target.closest('.prev-btn')) {
         e.preventDefault();
         this.prevStep();
-      });
-    });
+      }
 
-    // Selección de tipo de reporte
-    document.querySelectorAll('.report-option').forEach(btn => {
-      btn.addEventListener('click', (e) => {
+      // Selección de tipo de reporte
+      if (e.target.classList.contains('report-option') || e.target.closest('.report-option')) {
         e.preventDefault();
-        this.selectReportType(e);
-      });
-    });
+        const button = e.target.closest('.report-option');
+        this.selectReportType(button);
+      }
 
-    // Selección de método de entrega
-    document.querySelectorAll('.delivery-option').forEach(btn => {
-      btn.addEventListener('click', (e) => {
+      // Selección de método de entrega
+      if (e.target.classList.contains('delivery-option') || e.target.closest('.delivery-option')) {
         e.preventDefault();
-        this.selectDeliveryMethod(e);
-      });
+        const button = e.target.closest('.delivery-option');
+        this.selectDeliveryMethod(button);
+      }
     });
 
     // Upload de archivos
@@ -206,45 +202,61 @@ export class TurnitinForm {
     console.log('✅ Eventos vinculados correctamente');
   }
 
-showStep(step) {
-  console.log(`📄 Mostrando paso ${step}`);
-  
-  // MÉTODO ULTRA-SIMPLE: Ocultar todos, mostrar uno
-  document.querySelectorAll('.form-step').forEach((s, index) => {
-    const stepNumber = index + 1;
-    if (stepNumber === step) {
-      // Mostrar paso activo
-      s.style.display = 'block';
-      s.style.visibility = 'visible';
-      s.style.opacity = '1';
-      s.style.minHeight = '400px';
-      s.classList.add('active');
-    } else {
-      // Ocultar otros pasos
-      s.style.display = 'none';
-      s.classList.remove('active');
-    }
-  });
-  
-  // Actualizar indicadores
-  this.updateStepIndicators(step);
-  this.configureStep(step);
-  this.currentStep = step;
-  
-  console.log(`✅ Paso ${step} mostrado`);
-}
+  // MÉTODO CORREGIDO para mostrar pasos
+  showStep(step) {
+    console.log(`📄 Mostrando paso ${step}`);
+
+    const steps = document.querySelectorAll('.form-step');
+
+    steps.forEach((stepElement, index) => {
+      const stepNumber = index + 1;
+
+      // Remover todas las clases de estado
+      stepElement.classList.remove('active', 'prev', 'next');
+
+      if (stepNumber === step) {
+        // Paso actual - visible
+        stepElement.classList.add('active');
+        stepElement.style.opacity = '1';
+        stepElement.style.transform = 'translateX(0)';
+        stepElement.style.zIndex = '10';
+        stepElement.style.display = 'block'; // Asegurar que esté visible
+      } else if (stepNumber < step) {
+        // Pasos anteriores - ocultos a la izquierda
+        stepElement.classList.add('prev');
+        stepElement.style.opacity = '0';
+        stepElement.style.transform = 'translateX(-100%)';
+        stepElement.style.zIndex = '1';
+        stepElement.style.display = 'block'; // Mantener en DOM para transición
+      } else {
+        // Pasos siguientes - ocultos a la derecha
+        stepElement.classList.add('next');
+        stepElement.style.opacity = '0';
+        stepElement.style.transform = 'translateX(100%)';
+        stepElement.style.zIndex = '1';
+        stepElement.style.display = 'block'; // Mantener en DOM para transición
+      }
+    });
+
+    // Actualizar indicadores
+    this.updateStepIndicators(step);
+    this.configureStep(step);
+    this.currentStep = step;
+
+    console.log(`✅ Paso ${step} mostrado correctamente`);
+  }
 
   updateStepIndicators(currentStep) {
     document.querySelectorAll('.step-indicator').forEach((indicator, index) => {
       const stepNum = index + 1;
 
       // Limpiar clases anteriores
-      indicator.className = 'step-indicator w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium transition-all';
+      indicator.className = 'step-indicator w-6 h-6 md:w-8 md:h-8 rounded-full flex items-center justify-center text-xs md:text-sm font-medium transition-all';
 
       if (stepNum === currentStep) {
-        indicator.classList.add('bg-blue-500', 'text-white');
+        indicator.classList.add('bg-blue-500', 'text-white', 'active');
       } else if (stepNum < currentStep) {
-        indicator.classList.add('bg-green-500', 'text-white');
+        indicator.classList.add('bg-green-500', 'text-white', 'completed');
       } else {
         indicator.classList.add('bg-slate-700', 'text-gray-400');
       }
@@ -297,7 +309,7 @@ showStep(step) {
     this.updateSummary();
   }
 
-  selectReportType(e) {
+  selectReportType(button) {
     console.log('📊 Seleccionando tipo de reporte...');
 
     // Limpiar selección anterior
@@ -306,22 +318,27 @@ showStep(step) {
     });
 
     // Seleccionar nuevo
-    e.currentTarget.classList.add('selected');
+    button.classList.add('selected');
 
-    this.formData.reportType = e.currentTarget.dataset.value;
-    this.formData.maxFiles = parseInt(e.currentTarget.dataset.files);
+    this.formData.reportType = button.dataset.value;
+    this.formData.maxFiles = parseInt(button.dataset.files);
 
     console.log(`✅ Tipo seleccionado: ${this.formData.reportType}, Max archivos: ${this.formData.maxFiles}`);
 
-    // Habilitar botón siguiente
-    const nextBtn = document.querySelector('[data-step="2"] .next-btn');
+    // Buscar específicamente el botón del paso 2
+    const step2 = document.querySelector('.form-step[data-step="2"]');
+    const nextBtn = step2?.querySelector('.next-btn');
+
     if (nextBtn) {
       nextBtn.disabled = false;
       nextBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+      console.log('✅ Botón del paso 2 habilitado');
+    } else {
+      console.error('❌ No se encontró el botón del paso 2');
     }
   }
 
-  selectDeliveryMethod(e) {
+  selectDeliveryMethod(button) {
     console.log('📧 Seleccionando método de entrega...');
 
     // Limpiar selección anterior
@@ -330,13 +347,37 @@ showStep(step) {
     });
 
     // Seleccionar nuevo
-    e.currentTarget.classList.add('selected');
+    button.classList.add('selected');
 
-    this.formData.deliveryMethod = e.currentTarget.dataset.value;
+    this.formData.deliveryMethod = button.dataset.value;
 
     console.log(`✅ Método seleccionado: ${this.formData.deliveryMethod}`);
 
     this.updateSubmitButton();
+  }
+
+  // Método auxiliar para habilitar botones de paso específico
+  enableStepButton(step, buttonType) {
+    const stepElement = document.querySelector(`[data-step="${step}"]`);
+    if (!stepElement) return;
+
+    const button = stepElement.querySelector(`.${buttonType}-btn`);
+    if (button) {
+      button.disabled = false;
+      button.classList.remove('opacity-50', 'cursor-not-allowed');
+    }
+  }
+
+  // Método auxiliar para deshabilitar botones de paso específico
+  disableStepButton(step, buttonType) {
+    const stepElement = document.querySelector(`[data-step="${step}"]`);
+    if (!stepElement) return;
+
+    const button = stepElement.querySelector(`.${buttonType}-btn`);
+    if (button) {
+      button.disabled = true;
+      button.classList.add('opacity-50', 'cursor-not-allowed');
+    }
   }
 
   handleFileUpload(e) {
@@ -373,12 +414,14 @@ showStep(step) {
     this.renderFilePreview();
 
     // Habilitar botón siguiente si se subieron todos los archivos necesarios
-    const nextBtn = document.querySelector('[data-step="3"] .next-btn');
+    const step3 = document.querySelector('.form-step[data-step="3"]');
+    const nextBtn = step3?.querySelector('.next-btn');
+
     if (nextBtn) {
       if (validFiles.length === this.formData.maxFiles) {
         nextBtn.disabled = false;
         nextBtn.classList.remove('opacity-50', 'cursor-not-allowed');
-        console.log('✅ Botón siguiente habilitado');
+        console.log('✅ Botón siguiente del paso 3 habilitado');
       } else {
         nextBtn.disabled = true;
         nextBtn.classList.add('opacity-50', 'cursor-not-allowed');
@@ -389,43 +432,74 @@ showStep(step) {
 
   renderFilePreview() {
     const preview = document.getElementById('files-preview');
+    const dropZone = document.getElementById('drop-zone');
+
     if (!preview) {
       console.error('❌ Elemento files-preview no encontrado');
       return;
     }
 
+    // Ocultar zona de drop cuando hay archivos
+    if (dropZone) {
+      dropZone.style.display = 'none';
+    }
+
     preview.innerHTML = '';
     preview.classList.remove('hidden');
 
+    // Container con scroll simple
+    const container = document.createElement('div');
+    container.className = 'max-h-60 overflow-y-auto space-y-3';
+
     this.formData.uploadedFiles.forEach((file, index) => {
       const fileElement = document.createElement('div');
-      fileElement.className = 'file-item bg-slate-800/50 border border-slate-600 rounded-lg p-4 flex items-center justify-between';
+      fileElement.className = 'bg-slate-800/50 border border-slate-600 rounded-lg p-3 md:p-4 flex items-center justify-between';
+
+      // Truncar nombre del archivo si es muy largo
+      const truncatedName = file.name.length > 30 ?
+        file.name.substring(0, 30) + '...' :
+        file.name;
+
       fileElement.innerHTML = `
-        <div class="flex items-center">
-          <span class="text-2xl mr-3">📄</span>
-          <div>
-            <div class="text-white text-sm font-medium">${file.name}</div>
-            <div class="text-gray-400 text-xs">${this.utils.formatFileSize(file.size)}</div>
-          </div>
+      <div class="flex items-center flex-1 min-w-0">
+        <span class="text-xl md:text-2xl mr-3 flex-shrink-0">📄</span>
+        <div class="flex-1 min-w-0">
+          <div class="text-white text-sm font-medium truncate" title="${file.name}">${truncatedName}</div>
+          <div class="text-gray-400 text-xs">${this.utils.formatFileSize(file.size)}</div>
         </div>
-        <button type="button" onclick="window.turnitinForm.removeFile(${index})" class="text-red-400 hover:text-red-300 transition-colors">
-          <span class="text-xl">×</span>
-        </button>
-      `;
-      preview.appendChild(fileElement);
+      </div>
+      <button 
+        type="button" 
+        onclick="window.turnitinForm.removeFile(${index})" 
+        class="ml-3 text-red-400 hover:text-red-300 transition-colors p-2 hover:bg-red-500/10 rounded-lg flex-shrink-0"
+        title="Eliminar archivo"
+      >
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    `;
+      container.appendChild(fileElement);
     });
+
+    preview.appendChild(container);
 
     console.log(`✅ Preview renderizado para ${this.formData.uploadedFiles.length} archivos`);
   }
 
   hideFilePreview() {
     const preview = document.getElementById('files-preview');
+    const dropZone = document.getElementById('drop-zone');
+
     if (preview) {
       preview.classList.add('hidden');
-      preview.innerHTML = '';
+    }
+
+    // Mostrar zona de drop cuando no hay archivos
+    if (dropZone) {
+      dropZone.style.display = 'block';
     }
   }
-
   removeFile(index) {
     console.log(`🗑️ Removiendo archivo en índice ${index}`);
 
@@ -442,7 +516,9 @@ showStep(step) {
     if (input) input.value = '';
 
     // Deshabilitar botón siguiente
-    const nextBtn = document.querySelector('[data-step="3"] .next-btn');
+    const step3 = document.querySelector('.form-step[data-step="3"]');
+    const nextBtn = step3?.querySelector('.next-btn');
+
     if (nextBtn) {
       nextBtn.disabled = true;
       nextBtn.classList.add('opacity-50', 'cursor-not-allowed');
@@ -472,20 +548,32 @@ showStep(step) {
     const preview = document.getElementById('payment-preview');
     if (!preview) return;
 
+    // Truncar nombre del archivo si es muy largo
+    const truncatedName = file.name.length > 25 ?
+      file.name.substring(0, 25) + '...' :
+      file.name;
+
     preview.innerHTML = `
-      <div class="file-item bg-slate-800/50 border border-slate-600 rounded-lg p-4 flex items-center justify-between">
-        <div class="flex items-center">
-          <span class="text-2xl mr-3">📷</span>
-          <div>
-            <div class="text-white text-sm font-medium">${file.name}</div>
-            <div class="text-gray-400 text-xs">${this.utils.formatFileSize(file.size)}</div>
-          </div>
+    <div class="bg-slate-800/50 border border-slate-600 rounded-lg p-3 md:p-4 flex items-center justify-between">
+      <div class="flex items-center flex-1 min-w-0">
+        <span class="text-xl md:text-2xl mr-3 flex-shrink-0">📷</span>
+        <div class="flex-1 min-w-0">
+          <div class="text-white text-sm font-medium truncate" title="${file.name}">${truncatedName}</div>
+          <div class="text-gray-400 text-xs">${this.utils.formatFileSize(file.size)}</div>
         </div>
-        <button type="button" onclick="window.turnitinForm.removePayment()" class="text-red-400 hover:text-red-300 transition-colors">
-          <span class="text-xl">×</span>
-        </button>
       </div>
-    `;
+      <button 
+        type="button" 
+        onclick="window.turnitinForm.removePayment()" 
+        class="ml-3 text-red-400 hover:text-red-300 transition-colors p-2 hover:bg-red-500/10 rounded-lg flex-shrink-0"
+        title="Eliminar comprobante"
+      >
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </div>
+  `;
     preview.classList.remove('hidden');
   }
 
@@ -545,8 +633,11 @@ showStep(step) {
     const phone = document.getElementById('phone')?.value.trim() || '';
     const email = document.getElementById('email')?.value.trim() || '';
 
-    const isValid = fullName && phone && email;
-    const nextBtn = document.querySelector('[data-step="1"] .next-btn');
+    const isValid = fullName.length > 0 && phone.length > 0 && email.length > 0;
+
+    // Buscar el botón del paso 1 específicamente
+    const step1 = document.querySelector('.form-step[data-step="1"]');
+    const nextBtn = step1?.querySelector('.next-btn');
 
     if (nextBtn) {
       nextBtn.disabled = !isValid;
@@ -556,6 +647,7 @@ showStep(step) {
         nextBtn.classList.add('opacity-50', 'cursor-not-allowed');
       }
     }
+
   }
 
   nextStep() {
