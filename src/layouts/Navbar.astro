@@ -35,7 +35,7 @@ import Logo from "../assets/img/logoDelta.svg";
             href="/servicios"
             class="font-sans font-medium text-blue-100 hover:text-white relative pb-1 transition-all duration-300 ease-in-out before:content-[''] before:absolute before:w-0 before:h-0.5 before:bottom-0 before:left-1/2 before:bg-blue-400 before:transition-all before:duration-300 before:ease-in-out hover:before:w-full hover:before:left-0"
           >
-          Servicios
+            Servicios
           </a>
         </li>
         <li>
@@ -50,108 +50,111 @@ import Logo from "../assets/img/logoDelta.svg";
 
       <!-- Botón de WhatsApp -->
       <div class="flex items-center flex-grow-0 basis-1/4 justify-end">
-        <button
-          class="group relative h-12 overflow-hidden rounded-md bg-blue-600 px-6 text-white transition-all duration-300 hover:bg-blue-700 hover:ring-2 hover:ring-blue-400 hover:ring-offset-2 hover:ring-offset-slate-900"
+        <a
+          href="https://wa.me/51923275353?text=Tengo%20una%20consulta"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="group relative h-12 overflow-hidden rounded-md bg-blue-600 px-6 text-white transition-all duration-300 hover:bg-blue-700 hover:ring-2 hover:ring-blue-400 hover:ring-offset-2 hover:ring-offset-slate-900 inline-flex items-center"
         >
           <span
             class="absolute right-0 -mt-12 h-32 w-8 translate-x-12 rotate-12 transform bg-white opacity-10 transition-all duration-1000 ease-out group-hover:-translate-x-40"
           ></span>
           <span><i class="fa-brands fa-whatsapp mr-2"></i>WhatsApp</span>
-        </button>
+        </a>
       </div>
     </div>
   </nav>
+</header>
 
-  <!-- Botón flotante para menú móvil - SOLO en móvil -->
-  <button
-    id="mobile-menu-btn"
-    class="md:hidden fixed top-5 right-6 z-30 w-10 h-10 rounded-full bg-blue-600/50 text-white shadow-lg flex items-center justify-center hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2"
+<!-- Botón flotante para menú móvil - SOLO en móvil -->
+<button
+  id="mobile-menu-btn"
+  class="md:hidden fixed top-5 right-6 z-30 w-10 h-10 rounded-full bg-blue-600/50 text-white shadow-lg flex items-center justify-center hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2"
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    class="h-6 w-6"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
   >
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      class="h-6 w-6"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      d="M4 6h16M4 12h16M4 18h16"></path>
+  </svg>
+</button>
+
+<!-- Sidebar móvil -->
+<div
+  id="mobile-sidebar"
+  class="fixed top-0 right-0 h-full w-72 bg-transparent backdrop-blur-sm shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out z-50 md:hidden"
+>
+  <div class="flex flex-col h-full">
+    <!-- Cabecera del sidebar con logo y botón cerrar -->
+    <div
+      class="flex justify-between items-center p-4 border-b border-slate-700/50"
     >
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
-        d="M4 6h16M4 12h16M4 18h16"></path>
-    </svg>
-  </button>
-
-  <!-- Sidebar móvil -->
-  <div
-    id="mobile-sidebar"
-    class="fixed top-0 right-0 h-full w-72 bg-transparent backdrop-blur-sm shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out z-50 md:hidden"
-  >
-    <div class="flex flex-col h-full">
-      <!-- Cabecera del sidebar con logo y botón cerrar -->
-      <div
-        class="flex justify-between items-center p-4 border-b border-slate-700/50"
+      <div class="flex items-center">
+        <img src={Logo.src} alt="Logo" class="h-10 w-auto mr-3" />
+        <div class="text-xl font-bold text-white">Delta Tesis</div>
+      </div>
+      <button
+        id="close-sidebar-btn"
+        class="text-gray-300 hover:text-white p-2 rounded-md hover:bg-slate-800/50 transition-colors"
       >
-        <div class="flex items-center">
-          <img src={Logo.src} alt="Logo" class="h-10 w-auto mr-3" />
-          <div class="text-xl font-bold text-white">Delta Tesis</div>
-        </div>
-        <button
-          id="close-sidebar-btn"
-          class="text-gray-300 hover:text-white p-2 rounded-md hover:bg-slate-800/50 transition-colors"
+        <svg
+          class="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
         >
-          <svg
-            class="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M6 18L18 6M6 6l12 12"></path>
-          </svg>
-        </button>
-      </div>
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </div>
 
-      <!-- Enlaces del sidebar -->
-      <div class="flex-grow overflow-y-auto py-4">
-        <div class="px-4 space-y-1">
-          <a
-            href="/"
-            class="flex items-center py-3 px-4 text-blue-100 hover:text-white hover:bg-slate-800/50 rounded-md transition-colors"
-          >
-            <span>Inicio</span>
-          </a>
-          <a
-            href="/servicios"
-            class="flex items-center py-3 px-4 text-blue-100 hover:text-white hover:bg-slate-800/50 rounded-md transition-colors"
-          >
-            <span>Servicios</span>
-          </a>
-          <a
-            href="/turnitin"
-            class="flex items-center py-3 px-4 text-blue-100 hover:text-white hover:bg-slate-800/50 rounded-md transition-colors"
-          >
-            <span>Turnitin</span>
-          </a>
-        </div>
-      </div>
-
-      <!-- Pie del sidebar con botón WhatsApp -->
-      <div class="p-4 border-t border-slate-700/50">
-        <button
-          class="flex items-center justify-center w-full py-3 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+    <!-- Enlaces del sidebar -->
+    <div class="flex-grow overflow-y-auto py-4">
+      <div class="px-4 space-y-1">
+        <a
+          href="/"
+          class="flex items-center py-3 px-4 text-blue-100 hover:text-white hover:bg-slate-800/50 rounded-md transition-colors"
         >
-          <i class="fa-brands fa-whatsapp mr-2 text-lg"></i>
-          <span>WhatsApp</span>
-        </button>
+          <span>Inicio</span>
+        </a>
+        <a
+          href="/servicios"
+          class="flex items-center py-3 px-4 text-blue-100 hover:text-white hover:bg-slate-800/50 rounded-md transition-colors"
+        >
+          <span>Servicios</span>
+        </a>
+        <a
+          href="/turnitin"
+          class="flex items-center py-3 px-4 text-blue-100 hover:text-white hover:bg-slate-800/50 rounded-md transition-colors"
+        >
+          <span>Turnitin</span>
+        </a>
       </div>
     </div>
+
+    <!-- Pie del sidebar con botón WhatsApp -->
+    <div class="p-4 border-t border-slate-700/50">
+      <button
+        class="flex items-center justify-center w-full py-3 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+      >
+        <i class="fa-brands fa-whatsapp mr-2 text-lg"></i>
+        <span>WhatsApp</span>
+      </button>
+    </div>
   </div>
-</header>
+</div>
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {

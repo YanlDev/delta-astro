@@ -1,0 +1,451 @@
+---
+import QR from "../../assets/img/QR-Yanl.jpg"
+---
+<!-- YapePopup.astro -->
+<div
+  id="yapePopup"
+  class="fixed inset-0 z-50 hidden items-center justify-center"
+>
+  <!-- Overlay con blur -->
+  <div
+    id="popupOverlay"
+    class="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-300"
+  >
+  </div>
+
+  <!-- Popup Container -->
+  <div
+    class="relative w-full max-w-md mx-4 sm:mx-auto transform transition-all duration-300 scale-95 opacity-0"
+    id="popupContent"
+  >
+    <div
+      class="bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700/50 rounded-2xl shadow-2xl overflow-hidden"
+    >
+      <!-- Header del popup -->
+      <div
+        class="bg-gradient-to-r from-purple-600 to-pink-600 px-6 py-2 flex items-center justify-between"
+      >
+        <div class="flex items-center gap-3">
+          <div
+            class="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center"
+          >
+            <span class="text-lg">💳</span>
+          </div>
+          <div>
+            <h3 class="text-white font-bold text-lg">Pago con Yape</h3>
+            <p class="text-purple-100 text-sm">Escanea o descarga el código QR</p>
+          </div>
+        </div>
+        <button
+          id="closePopup"
+          class="text-white/80 hover:text-black hover:bg-white/20 p-2 rounded-lg transition-colors duration-200"
+        >
+          <svg
+            class="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Contenido del popup -->
+      <div class="p-6">
+        <!-- QR Code Section -->
+        <div class="text-center mb-6">
+          <div
+            class="bg-white p-4 rounded-2xl shadow-lg inline-block mb-4 relative group"
+          >
+            <img
+              id="qrImage"
+              src={QR .src}
+              alt="QR Code Yape"
+              class="w-48 h-48 object-cover rounded-lg mx-auto"
+              crossorigin="anonymous"
+            />
+
+            <!-- Botón de descarga superpuesto -->
+            <button
+              id="downloadQR"
+              class="absolute top-2 right-2 bg-black/70 hover:bg-black/90 text-white p-2 rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 transform hover:scale-110"
+              title="Descargar QR Code"
+            >
+              <svg
+                class="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                ></path>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Titular arriba del texto del QR -->
+          <p class="text-gray-300 text-sm mb-2">Titular: M. Carreon</p>
+
+          <div class="flex items-center justify-center gap-2 mb-2">
+            <p class="text-gray-300 text-sm">
+              Escanea este código con tu app Yape
+            </p>
+
+            <!-- Botón de descarga alternativo (siempre visible en móviles) -->
+            <button
+              id="downloadQRMobile"
+              class="md:hidden bg-blue-600/20 hover:bg-blue-600/30 text-blue-400 p-2 rounded-lg transition-colors duration-200"
+              title="Descargar QR"
+            >
+              <svg
+                class="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                ></path>
+              </svg>
+            </button>
+          </div>
+
+          <p class="text-gray-400 text-xs">
+            Toca el ícono de descarga para guardar el QR
+          </p>
+        </div>
+
+        <!-- Información de pago - Solo número de teléfono -->
+        <div class="space-y-4">
+          <!-- Número de teléfono -->
+          <div
+            class="bg-slate-800/50 rounded-xl p-4 border border-slate-700/30"
+          >
+            <div class="flex items-center justify-between">
+              <div class="flex-1">
+                <p class="text-gray-400 text-sm mb-1">Número Yape</p>
+                <p class="text-white font-mono text-lg" id="phoneNumber">
+                  923-275-353
+                </p>
+              </div>
+              <button
+                id="copyPhone"
+                class="bg-blue-600/20 hover:bg-blue-600/30 text-blue-400 p-3 rounded-lg transition-colors duration-200 group"
+                title="Copiar número"
+              >
+                <svg
+                  id="copyPhoneIcon"
+                  class="w-5 h-5 group-hover:scale-110 transition-transform"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+                  ></path>
+                </svg>
+                <svg
+                  id="checkPhoneIcon"
+                  class="w-5 h-5 hidden text-green-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Instrucciones -->
+        <div
+          class="mt-6 p-4 bg-blue-900/20 border border-blue-500/20 rounded-xl"
+        >
+          <div class="flex items-start gap-3">
+            <div
+              class="w-6 h-6 bg-blue-500/30 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"
+            >
+              <span class="text-blue-400 text-sm">💡</span>
+            </div>
+            <div>
+              <p class="text-blue-300 font-medium text-sm mb-1">
+                Instrucciones:
+              </p>
+              <ol
+                class="text-blue-200 text-xs space-y-1 list-decimal list-inside"
+              >
+                <li>Abre tu app Yape</li>
+                <li>Escanea el código QR o transfiere al número</li>
+                <li>Completa el formulario con tu comprobante</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+
+        <!-- Botón de cerrar alternativo -->
+        <div class="mt-6 text-center">
+          <button
+            id="closePopupBottom"
+            class="text-gray-400 hover:text-white text-sm underline transition-colors duration-200"
+          >
+            Cerrar ventana
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    // Variables para el popup
+    const popup = document.getElementById("yapePopup");
+    const popupContent = document.getElementById("popupContent");
+    const overlay = document.getElementById("popupOverlay");
+    const closeButtons = [
+      document.getElementById("closePopup"),
+      document.getElementById("closePopupBottom"),
+    ];
+
+    // Función para abrir popup
+    function openYapePopup() {
+      popup.classList.remove("hidden");
+      popup.classList.add("flex");
+
+      // Animación de entrada
+      setTimeout(() => {
+        popupContent.classList.remove("scale-95", "opacity-0");
+        popupContent.classList.add("scale-100", "opacity-100");
+      }, 10);
+
+      // Prevenir scroll del body
+      document.body.style.overflow = "hidden";
+    }
+
+    // Función para cerrar popup
+    function closeYapePopup() {
+      popupContent.classList.remove("scale-100", "opacity-100");
+      popupContent.classList.add("scale-95", "opacity-0");
+
+      setTimeout(() => {
+        popup.classList.remove("flex");
+        popup.classList.add("hidden");
+        document.body.style.overflow = "auto";
+      }, 300);
+    }
+
+    // Event listeners para cerrar
+    closeButtons.forEach((button) => {
+      if (button) {
+        button.addEventListener("click", closeYapePopup);
+      }
+    });
+
+    // Cerrar al hacer click en el overlay
+    overlay.addEventListener("click", closeYapePopup);
+
+    // Cerrar con tecla Escape
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && !popup.classList.contains("hidden")) {
+        closeYapePopup();
+      }
+    });
+
+    // Función para copiar al portapapeles
+    async function copyToClipboard(text, type) {
+      try {
+        await navigator.clipboard.writeText(text);
+
+        // Mostrar feedback visual solo para teléfono
+        if (type === "phone") {
+          const copyIcon = document.getElementById("copyPhoneIcon");
+          const checkIcon = document.getElementById("checkPhoneIcon");
+
+          copyIcon.classList.add("hidden");
+          checkIcon.classList.remove("hidden");
+
+          setTimeout(() => {
+            copyIcon.classList.remove("hidden");
+            checkIcon.classList.add("hidden");
+          }, 2000);
+        }
+
+        // Mostrar toast
+        showToast("Número copiado al portapapeles");
+      } catch (err) {
+        console.error("Error al copiar: ", err);
+        // Fallback para navegadores que no soportan clipboard API
+        fallbackCopyTextToClipboard(text, type);
+      }
+    }
+
+    // Fallback para copiar en navegadores antiguos
+    function fallbackCopyTextToClipboard(text, type) {
+      const textArea = document.createElement("textarea");
+      textArea.value = text;
+      textArea.style.top = "0";
+      textArea.style.left = "0";
+      textArea.style.position = "fixed";
+
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+
+      try {
+        document.execCommand("copy");
+        showToast("Número copiado al portapapeles");
+      } catch (err) {
+        console.error("Fallback: Error al copiar", err);
+      }
+
+      document.body.removeChild(textArea);
+    }
+
+    // Función para mostrar toast
+    function showToast(message) {
+      // Crear toast element
+      const toast = document.createElement("div");
+      toast.className =
+        "fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg z-50 transition-all duration-300";
+      toast.textContent = message;
+
+      document.body.appendChild(toast);
+
+      // Remover después de 3 segundos
+      setTimeout(() => {
+        toast.style.opacity = "0";
+        setTimeout(() => {
+          document.body.removeChild(toast);
+        }, 300);
+      }, 3000);
+    }
+
+    // Función para descargar el QR Code
+    async function downloadQRCode() {
+      try {
+        const img = document.getElementById("qrImage");
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
+
+        // Crear una nueva imagen para evitar problemas de CORS
+        const downloadImg = new Image();
+        downloadImg.crossOrigin = "anonymous";
+
+        downloadImg.onload = function () {
+          // Configurar el canvas con el tamaño de la imagen
+          canvas.width = downloadImg.naturalWidth;
+          canvas.height = downloadImg.naturalHeight;
+
+          // Dibujar la imagen en el canvas
+          ctx.drawImage(downloadImg, 0, 0);
+
+          // Convertir a blob y descargar
+          canvas.toBlob(function (blob) {
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement("a");
+            link.href = url;
+            link.download = "QR-Yape-Pago.png";
+
+            // Agregar al DOM temporalmente para trigger del click
+            document.body.appendChild(link);
+            link.click();
+
+            // Limpiar
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+
+            // Mostrar confirmación
+            showToast("QR Code descargado exitosamente");
+          }, "image/png");
+        };
+
+        downloadImg.onerror = function () {
+          // Fallback: crear enlace directo si falla el canvas
+          console.log("Fallback: usando enlace directo");
+          fallbackDownload();
+        };
+
+        // Cargar la imagen
+        downloadImg.src = img.src;
+      } catch (error) {
+        console.error("Error al descargar QR:", error);
+        fallbackDownload();
+      }
+    }
+
+    // Función de respaldo para la descarga
+    function fallbackDownload() {
+      try {
+        const link = document.createElement("a");
+        link.href = "/assets/img/QR-Yanl.jpg";
+        link.download = "QR-Yape-Pago.jpg";
+        link.target = "_blank";
+
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        showToast("Descarga iniciada - verifica tu carpeta de descargas");
+      } catch (error) {
+        console.error("Error en fallback download:", error);
+        showToast("Error al descargar. Intenta guardar la imagen manualmente.");
+      }
+    }
+
+    // Event listeners para copiar solo el teléfono
+    document.getElementById("copyPhone").addEventListener("click", () => {
+      copyToClipboard("923275353", "phone");
+    });
+
+    // Event listeners para descargar QR
+    document
+      .getElementById("downloadQR")
+      .addEventListener("click", downloadQRCode);
+    document
+      .getElementById("downloadQRMobile")
+      .addEventListener("click", downloadQRCode);
+
+    // Exponer función globalmente para el botón principal
+    window.openYapePopup = openYapePopup;
+  </script>
+  <style>
+    /* Asegurar que las transiciones funcionen suavemente */
+    #popupContent {
+      transition:
+        transform 0.3s ease-out,
+        opacity 0.3s ease-out;
+    }
+
+    /* Animación sutil para los botones de copiar */
+    .group:hover svg {
+      animation: bounce 0.3s ease-in-out;
+    }
+
+    @keyframes bounce {
+      0%,
+      100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.1);
+      }
+    }
+  </style>
+</div>

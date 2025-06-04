@@ -1,5 +1,4 @@
 ---
-// TurnitinForm.astro - Versión con variables de entorno
 const telegramConfig = {
   botToken: import.meta.env.PUBLIC_TELEGRAM_BOT_TOKEN,
   chatId: import.meta.env.PUBLIC_TELEGRAM_CHAT_ID
@@ -76,22 +75,21 @@ const telegramConfig = {
                   <div class="text-white font-semibold">Reporte Único</div>
                   <div class="text-gray-400 text-sm">1 documento</div>
                 </div>
-                <div class="text-2xl font-bold text-blue-400">S/7</div>
+                <div class="text-2xl font-bold text-blue-400">S/10</div>
               </div>
             </div>
           </label>
 
           <label class="report-option cursor-pointer block">
-            <input type="radio" name="reportType" value="pack" data-files="3" class="hidden" />
+            <input type="radio" name="reportType" value="pack" data-files="2" class="hidden" />
             <div class="p-4 bg-slate-800 border-2 border-slate-600 rounded-lg transition-all hover:border-purple-500 report-card relative">
               <div class="absolute -top-2 -right-2 bg-pink-500 text-white px-2 py-1 rounded-full text-xs">
                 Más Popular
               </div>
               <div class="flex justify-between items-center">
                 <div>
-                  <div class="text-white font-semibold">Pack 3 Reportes</div>
-                  <div class="text-gray-400 text-sm">3 documentos diferentes</div>
-                  <div class="text-green-400 text-xs font-medium">Ahorro 28%</div>
+                  <div class="text-white font-semibold">Pack 2 Reportes</div>
+                  <div class="text-gray-400 text-sm">2 documentos</div>
                 </div>
                 <div class="text-2xl font-bold text-purple-400">S/15</div>
               </div>

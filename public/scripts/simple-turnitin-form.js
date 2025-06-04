@@ -11,12 +11,8 @@ class SimpleTurnitinForm {
   }
 
   init() {
-    console.log('🚀 Inicializando formulario Turnitin...');
-
     this.bindEvents();
     this.validateForm();
-
-    console.log('✅ Formulario inicializado correctamente');
   }
 
   bindEvents() {
@@ -59,7 +55,6 @@ class SimpleTurnitinForm {
   }
 
   handleReportTypeChange(e) {
-    console.log('📊 Cambiando tipo de reporte:', e.target.value);
 
     // Limpiar selecciones visuales
     document.querySelectorAll('.report-card').forEach(card => {
@@ -114,9 +109,9 @@ class SimpleTurnitinForm {
     const filesNeeded = document.getElementById('files-needed');
     const documentsInput = document.getElementById('documents');
 
-    if (this.maxFiles === 3) {
+    if (this.maxFiles === 2) {
       documentsInput.setAttribute('multiple', 'true');
-      fileCountText.textContent = 'documentos (3)';
+      fileCountText.textContent = 'documentos (2)';
       filesNeeded.textContent = 'archivos';
     } else {
       documentsInput.removeAttribute('multiple');
@@ -331,7 +326,7 @@ class SimpleTurnitinForm {
       const content = document.getElementById('summary-content');
 
       if (summary && content) {
-        const reportText = reportType.value === 'pack' ? 'Pack 3 Reportes (S/15)' : 'Reporte Único (S/7)';
+        const reportText = reportType.value === 'pack' ? 'Pack 2 Reportes (S/15)' : 'Reporte Único (S/10)';
         const deliveryText = deliveryMethod.value === 'whatsapp' ? 'WhatsApp' : 'Email';
 
         content.innerHTML = `
@@ -364,7 +359,6 @@ class SimpleTurnitinForm {
     try {
       // Recopilar datos del formulario
       const formData = this.collectFormData();
-      console.log('📋 Datos a enviar:', formData);
 
       // ENVIAR REALMENTE A TELEGRAM - usando tus credenciales del .env
       await this.sendToTelegram(formData);
@@ -405,7 +399,6 @@ class SimpleTurnitinForm {
     };
   }
 
-  // FUNCIÓN QUE REALMENTE ENVÍA A TELEGRAM
   async sendToTelegram(formData) {
     // Obtener credenciales de las variables de entorno de Astro
     const botToken = window.TELEGRAM_BOT_TOKEN;
@@ -446,11 +439,10 @@ class SimpleTurnitinForm {
       );
     }
 
-    console.log('✅ Enviado correctamente a Telegram');
   }
 
   createTelegramMessage(data) {
-    const tipoReporteText = data.tipoReporte === 'unico' ? 'Reporte Único (S/7)' : 'Pack de 3 Reportes (S/15)';
+    const tipoReporteText = data.tipoReporte === 'unico' ? 'Reporte Único (S/10)' : 'Pack de 2 Reportes (S/15)';
     const metodoEntregaText = data.metodoEntrega === 'whatsapp' ? 'WhatsApp' : 'Correo Electrónico';
 
     return `

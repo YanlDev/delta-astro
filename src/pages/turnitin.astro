@@ -1,16 +1,19 @@
 ---
-// src/pages/turnitin.astro
 import Layout from "../layouts/Layout.astro";
 import TurnitinForm from "../layouts/components/TurnitinForm.astro";
+import QR from "../assets/img/QR-Yanl.jpg"
+import TurnitinReport from "../assets/img/services/turnitin.png"
+import Turnitin from "../layouts/home/Turnitin.astro";
+import YapePopup from "../layouts/components/YapePopup.astro"
 ---
 
 <Layout
   title="Revisión Turnitin - Reporte de Similitud en 5 Minutos | Delta Tesis"
-  description="Obtén tu reporte de similitud Turnitin en solo 5 minutos sin depositar tu documento en la base de datos. Servicio rápido y confidencial."
+  description="Obtén tu reporte de similitud Turnitin en solo 15 minutos sin depositar tu documento en la base de datos. Servicio rápido y confidencial."
 >
   <!-- Hero Section de Turnitin -->
   <section
-    class="relative bg-gradient-to-r from-slate-900 to-slate-800 overflow-hidden pt-20"
+    class="gradient-bg min-h-screen flex items-center relative overflow-hidden"
   >
     <!-- Elementos decorativos de fondo -->
     <div class="absolute inset-0 opacity-10">
@@ -24,6 +27,138 @@ import TurnitinForm from "../layouts/components/TurnitinForm.astro";
       </div>
       <div
         class="absolute bottom-0 right-10 w-80 h-80 bg-purple-500 rounded-full mix-blend-multiply blur-2xl"
+      >
+      </div>
+    </div>
+
+    <!-- Grid de fondo -->
+    <div class="absolute inset-0 opacity-5">
+      <div
+        class="h-full w-full"
+        style="background-image: radial-gradient(circle, #ffffff 1px, transparent 1px); background-size: 50px 50px;"
+      >
+      </div>
+    </div>
+
+    <div class="container mx-auto px-4 py-16 relative z-10">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <!-- Lado izquierdo: Contenido principal -->
+        <div class="text-center lg:text-left">
+          <div class="mb-6">
+            <span
+              class="inline-block bg-blue-500/20 text-blue-300 px-4 py-2 rounded-full text-sm font-medium mb-4"
+            >
+              ⚡ Entrega en 15 minutos
+            </span>
+          </div>
+
+          <h1
+            class="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6"
+          >
+            Reporte
+            <span
+              class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500"
+            >
+              Turnitin
+            </span>
+            <br />Instantáneo
+          </h1>
+
+          <p class="text-xl text-gray-300 mb-8 max-w-2xl lg:max-w-none mx-auto">
+            Obtén tu análisis de similitud <strong
+              >sin depositar tu documento</strong
+            > en la base de datos. Proceso 100% confidencial.
+          </p>
+
+          <!-- Características rápidas -->
+          <div
+            class="flex flex-wrap justify-center lg:justify-start gap-4 mb-8"
+          >
+            <div
+              class="flex items-center gap-2 bg-slate-800/50 px-4 py-2 rounded-lg border border-slate-700/50"
+            >
+              <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+              <span class="text-gray-300 text-sm">Sin depósito</span>
+            </div>
+            <div
+              class="flex items-center gap-2 bg-slate-800/50 px-4 py-2 rounded-lg border border-slate-700/50"
+            >
+              <div class="w-2 h-2 bg-blue-400 rounded-full"></div>
+              <span class="text-gray-300 text-sm">PDF completo</span>
+            </div>
+          </div>
+
+          <!-- Botones CTA principales -->
+          <div
+            class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+          >
+            <a
+              onclick="openYapePopup()"
+              class="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold px-8 py-4 rounded-xl transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl pulse-animation text-center"
+            >
+              🚀 Pagar y Subir Documento
+            </a>
+            <!-- <a
+              href="#ejemplo-reporte"
+              class="bg-transparent border-2 border-white/30 hover:border-white/80 text-white font-medium px-8 py-4 rounded-xl transition-all duration-300 hover:bg-white/10 text-center"
+            >
+              👁️ Ver Ejemplo de Reporte
+            </a> -->
+          </div>
+        </div>
+
+        <!-- Lado derecho: Visuales del servicio -->
+        <div class="relative">
+          <!-- Imagen principal del reporte -->
+          <div class="relative floating-animation">
+            <div
+              class="bg-gradient-to-br from-slate-800/80 to-slate-900/80 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-5 shadow-2xl"
+            >
+              <img
+                src={TurnitinReport .src}
+                alt="Ejemplo de Reporte Turnitin"
+                class="w-full h-auto rounded-lg shadow-lg">
+
+              <div class="text-center">
+                <div class="text-green-400 font-semibold mb-2">
+                  ✅ Reporte Completo en PDF
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- QR de pago flotante -->
+          <div
+            class="absolute -bottom-6 -right-1 bg-gradient-to-br from-purple-600 to-pink-600 p-4 rounded-2xl shadow-2xl transform rotate-3"
+          >
+            <div class="bg-white p-1 rounded-xl">
+              <img src={QR .src} alt="" class="object-cover w-34 34 rounded-lg" />
+            </div>
+            <div class="text-white text-center mt-2 text-sm font-medium">
+              923-275-353
+            </div>
+          </div>
+
+          <!-- Badge de confianza -->
+          <div
+            class="absolute -top-4 -left-4 bg-green-500 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg"
+          >
+            +100 reportes entregados
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 bg-slate-900 relative overflow-hidden">
+    <!-- Elementos decorativos de fondo -->
+    <div class="absolute inset-0 opacity-10">
+      <div
+        class="absolute top-1/4 -right-24 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply blur-2xl"
+      >
+      </div>
+      <div
+        class="absolute bottom-0 -left-24 w-72 h-72 bg-indigo-500 rounded-full mix-blend-multiply blur-2xl"
       >
       </div>
     </div>
@@ -46,122 +181,213 @@ import TurnitinForm from "../layouts/components/TurnitinForm.astro";
       </div>
     </div>
 
-    <div class="container mx-auto px-4 py-16 sm:py-24 relative z-10">
-      <div class="text-center max-w-4xl mx-auto">
-        <h1
-          class="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6"
-        >
-          Revisión <span
-            class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-500"
-            >Turnitin</span
-          >
-          en 5 Minutos
-        </h1>
-        <p class="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
-          Obtén tu reporte de similitud sin depositar tu documento en la base de
-          datos de Turnitin. Servicio rápido, confidencial y profesional.
+    <div class="container mx-auto px-4 relative z-10">
+      <!-- Encabezado de la sección -->
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+          ¿Cómo Funciona Nuestro Proceso?
+        </h2>
+        <p class="text-gray-300 max-w-3xl mx-auto">
+          Un proceso simple y rápido en solo 4 pasos para obtener tu reporte de
+          similitud Turnitin.
         </p>
-
-        <!-- Características destacadas -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-          <div
-            class="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-lg p-6"
-          >
-            <div
-              class="w-12 h-12 bg-green-500/20 rounded-lg flex items-center justify-center mx-auto mb-4"
-            >
-              <svg
-                class="w-6 h-6 text-green-400"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-              </svg>
-            </div>
-            <h3 class="text-lg font-semibold text-white mb-2">
-              Entrega Rápida
-            </h3>
-            <p class="text-gray-300 text-sm">
-              Recibe tu reporte en máximo 5 minutos
-            </p>
-          </div>
-
-          <div
-            class="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-lg p-6"
-          >
-            <div
-              class="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center mx-auto mb-4"
-            >
-              <svg
-                class="w-6 h-6 text-blue-400"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
-                ></path>
-              </svg>
-            </div>
-            <h3 class="text-lg font-semibold text-white mb-2">Sin Depósito</h3>
-            <p class="text-gray-300 text-sm">
-              Tu documento no queda en la base de datos
-            </p>
-          </div>
-
-          <div
-            class="bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-lg p-6"
-          >
-            <div
-              class="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center mx-auto mb-4"
-            >
-              <svg
-                class="w-6 h-6 text-purple-400"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
-                ></path>
-              </svg>
-            </div>
-            <h3 class="text-lg font-semibold text-white mb-2">
-              100% Confiable
-            </h3>
-            <p class="text-gray-300 text-sm">Proceso seguro y confidencial</p>
-          </div>
-        </div>
-
-        <!-- CTA para ir al formulario -->
         <div
-          class="flex flex-col sm:flex-row items-center justify-center gap-4"
+          class="w-24 h-1 bg-gradient-to-r from-blue-600 to-indigo-600 mx-auto mt-6"
         >
-          <a
-            href="#formulario-turnitin"
-            class="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-medium px-8 py-3 rounded-lg transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg"
-          >
-            Solicitar Reporte Ahora
-          </a>
-          <a
-            href="#precios"
-            class="bg-transparent border border-white/30 hover:border-white/80 text-white font-medium px-8 py-3 rounded-lg transition-all duration-300 hover:bg-white/10"
-          >
-            Ver Precios
-          </a>
         </div>
       </div>
+
+      <!-- Pasos del proceso -->
+      <div
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto"
+      >
+        <!-- Paso 1: Realizar Pago -->
+        <div class="relative group">
+          <!-- Número del paso -->
+          <div
+            class="absolute -top-4 -left-4 w-12 h-12 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg z-10"
+          >
+            1
+          </div>
+
+          <!-- Tarjeta del paso -->
+          <div
+            class="bg-slate-800/70 backdrop-blur-sm border border-slate-700/50 rounded-xl p-6 pt-8 h-full transition-all duration-300 hover:shadow-xl hover:-translate-y-2 hover:border-blue-500/50"
+          >
+            <!-- Icono SVG -->
+            <div
+              class="w-36 h-36 mx-auto mb-6 bg-blue-900/30 rounded-lg flex items-center justify-center border border-blue-500/20 p-3"
+            >
+              <img
+                src="/img/turnitinSteps/qr-code.svg"
+                alt="Realizar Pago"
+                class="w-full h-full object-contain"
+              />
+            </div>
+
+            <!-- Contenido -->
+            <h3 class="text-xl font-bold text-white mb-3 text-center">
+              Realiza tu Pago
+            </h3>
+            <p class="text-gray-300 text-center text-sm leading-relaxed">
+              Elige entre reporte único (S/10) o pack de 2 reportes (S/15) y
+              transfiere por tu billetera digital Yape.
+            </p>
+
+            <!-- Badges de métodos de pago -->
+            <div class="flex justify-center gap-2 mt-4">
+              <span
+                class="bg-blue-500/20 text-blue-300 px-2 py-1 rounded text-xs"
+                >Yape</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <!-- Paso 2: Llenar Formulario -->
+        <div class="relative group">
+          <!-- Número del paso -->
+          <div
+            class="absolute -top-4 -left-4 w-12 h-12 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg z-10"
+          >
+            2
+          </div>
+
+          <!-- Tarjeta del paso -->
+          <div
+            class="bg-slate-800/70 backdrop-blur-sm border border-slate-700/50 rounded-xl p-6 pt-8 h-full transition-all duration-300 hover:shadow-xl hover:-translate-y-2 hover:border-purple-500/50"
+          >
+            <!-- Icono SVG -->
+            <div
+              class="w-36 h-36 mx-auto mb-6 bg-purple-900/30 rounded-lg flex items-center justify-center border border-purple-500/20 p-3"
+            >
+              <img
+                src="/img/turnitinSteps/personal-data.svg"
+                alt="Llenar Formulario"
+                class="w-full h-full object-contain"
+              />
+            </div>
+
+            <!-- Contenido -->
+            <h3 class="text-xl font-bold text-white mb-3 text-center">
+              Llena el Formulario
+            </h3>
+            <p class="text-gray-300 text-center text-sm leading-relaxed">
+              Completa tus datos, adjunta tu documento (DOC, DOCX, PDF) y sube
+              el comprobante de pago.
+            </p>
+
+            <!-- Badges de formatos -->
+            <div class="flex justify-center gap-2 mt-4">
+              <span
+                class="bg-purple-500/20 text-purple-300 px-2 py-1 rounded text-xs"
+                >PDF</span
+              >
+              <span
+                class="bg-purple-500/20 text-purple-300 px-2 py-1 rounded text-xs"
+                >DOC</span
+              >
+              <span
+                class="bg-purple-500/20 text-purple-300 px-2 py-1 rounded text-xs"
+                >DOCX</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <!-- Paso 3: Validación del Pago -->
+        <div class="relative group">
+          <!-- Número del paso -->
+          <div
+            class="absolute -top-4 -left-4 w-12 h-12 bg-gradient-to-r from-orange-600 to-yellow-600 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg z-10"
+          >
+            3
+          </div>
+
+          <!-- Tarjeta del paso -->
+          <div
+            class="bg-slate-800/70 backdrop-blur-sm border border-slate-700/50 rounded-xl p-6 pt-8 h-full transition-all duration-300 hover:shadow-xl hover:-translate-y-2 hover:border-orange-500/50"
+          >
+            <!-- Icono SVG -->
+            <div
+              class="w-36 h-36 mx-auto mb-6 bg-orange-900/30 rounded-lg flex items-center justify-center border border-orange-500/20 p-3"
+            >
+              <img
+                src="/img/turnitinSteps/order-confirmed.svg"
+                alt="Validación del Pago"
+                class="w-full h-full object-contain"
+              />
+            </div>
+
+            <!-- Contenido -->
+            <h3 class="text-xl font-bold text-white mb-3 text-center">
+              Validamos tu Pago
+            </h3>
+            <p class="text-gray-300 text-center text-sm leading-relaxed">
+              Nuestro equipo verifica tu comprobante de pago para procesar tu
+              solicitud inmediatamente.
+            </p>
+
+            <!-- Badge de tiempo -->
+            <div class="flex justify-center mt-4">
+              <span
+                class="bg-orange-500/20 text-orange-300 px-3 py-1 rounded-full text-xs font-medium"
+              >
+                ⚡ Verificación Rápida
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Paso 4: Recibe tu Reporte -->
+        <div class="relative group">
+          <!-- Número del paso -->
+          <div
+            class="absolute -top-4 -left-4 w-12 h-12 bg-gradient-to-r from-green-600 to-emerald-600 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg z-10"
+          >
+            4
+          </div>
+
+          <!-- Tarjeta del paso -->
+          <div
+            class="bg-slate-800/70 backdrop-blur-sm border border-slate-700/50 rounded-xl p-6 pt-8 h-full transition-all duration-300 hover:shadow-xl hover:-translate-y-2 hover:border-green-500/50"
+          >
+            <!-- Icono SVG -->
+            <div
+              class="w-36 h-36 mx-auto mb-6 bg-green-900/30 rounded-lg flex items-center justify-center border border-green-500/20 p-3"
+            >
+              <img
+                src="/img/turnitinSteps/report-analysis.svg"
+                alt="Recibe tu Reporte"
+                class="w-full h-full object-contain"
+              />
+            </div>
+
+            <!-- Contenido -->
+            <h3 class="text-xl font-bold text-white mb-3 text-center">
+              Recibe tu Reporte
+            </h3>
+            <p class="text-gray-300 text-center text-sm leading-relaxed">
+              En máximo 15 minutos recibes tu reporte completo en PDF por
+              WhatsApp o email.
+            </p>
+
+            <!-- Badge de tiempo de entrega -->
+            <div class="flex justify-center gap-2 mt-4">
+              <span
+                class="bg-green-500/20 text-green-300 px-2 py-1 rounded text-xs"
+                >⏰ 15 min</span
+              >
+              <span
+                class="bg-green-500/20 text-green-300 px-2 py-1 rounded text-xs"
+                >📄 PDF</span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA final -->
     </div>
   </section>
 
@@ -200,5 +426,37 @@ import TurnitinForm from "../layouts/components/TurnitinForm.astro";
       </div>
     </section>
   </section>
-  
-  </Layout>
+
+  <Turnitin/>
+
+  <style>
+    .gradient-bg {
+      background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+    }
+    .floating-animation {
+      animation: floating 3s ease-in-out infinite;
+    }
+    @keyframes floating {
+      0%,
+      100% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+    .pulse-animation {
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%,
+      100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+    }
+  </style>
+  <YapePopup />
+</Layout>

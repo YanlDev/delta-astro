@@ -23,7 +23,6 @@ const {
   colorClass = "from-blue-600 to-indigo-600",
   href,
   buttonText = "Más información",
-  buttonColor = "from-teal-600 to-cyan-600",
   fullWidth = false
 } = Astro.props;
 ---
@@ -85,19 +84,7 @@ const {
           ))}
         </div>
       )}
-      <div class="flex flex-col sm:flex-row items-center justify-between pt-4 border-t border-slate-700/50 mt-auto">
-        <div class="flex items-center mb-3 sm:mb-0">
-          {displayType === "price" ? (
-            <div class="flex items-center">
-              <div class="text-sm text-blue-400">Desde</div>
-              <div class="text-xl font-bold text-white ml-1">{price}</div>
-            </div>
-          ) : (
-            <div class={`text-xl font-bold py-1 px-4 rounded-lg bg-gradient-to-r ${buttonColor} text-white`}>
-              Cotiza Ya!
-            </div>
-          )}
-        </div>
+      
         <a
           href={href}
           class="text-blue-400 hover:text-blue-300 text-sm font-medium flex items-center transition-colors"
