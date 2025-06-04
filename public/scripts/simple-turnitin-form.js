@@ -1,6 +1,4 @@
-// src/scripts/simple-turnitin-form.js
-
-export class SimpleTurnitinForm {
+class SimpleTurnitinForm {
   constructor() {
     this.uploadedFiles = [];
     this.paymentFile = null;
