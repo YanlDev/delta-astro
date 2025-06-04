@@ -1,32 +1,28 @@
 ---
-// TurnitinForm.astro - Versión responsive optimizada
+// TurnitinForm.astro - Versión con variables de entorno
+const telegramConfig = {
+  botToken: import.meta.env.PUBLIC_TELEGRAM_BOT_TOKEN,
+  chatId: import.meta.env.PUBLIC_TELEGRAM_CHAT_ID
+};
 ---
 
 <section
   id="formulario-turnitin"
   class="py-8 md:py-12 bg-slate-800 relative overflow-hidden"
 >
-
   <!-- Layout responsivo: Móvil = columna única, Desktop = dos columnas -->
   <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
     <!-- COLUMNA IZQUIERDA -->
-    <div
-      class="bg-slate-900 border border-slate-700 rounded-xl p-6 md:p-8 space-y-6"
-    >
+    <div class="bg-slate-900 border border-slate-700 rounded-xl p-6 md:p-8 space-y-6">
       <!-- Información Personal -->
       <div class="space-y-4">
         <h3 class="text-lg font-semibold text-white flex items-center mb-4">
-          <span
-            class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-sm mr-3"
-            >1</span
-          >
+          <span class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-sm mr-3">1</span>
           Información Personal
         </h3>
-
+        
         <div>
-          <label class="block text-sm font-medium text-gray-300 mb-2"
-            >Nombre Completo *</label
-          >
+          <label class="block text-sm font-medium text-gray-300 mb-2">Nombre Completo *</label>
           <input
             type="text"
             id="fullName"
@@ -36,12 +32,10 @@
             placeholder="Ej: Juan Carlos Pérez López"
           />
         </div>
-
+        
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label class="block text-sm font-medium text-gray-300 mb-2"
-              >WhatsApp *</label
-            >
+            <label class="block text-sm font-medium text-gray-300 mb-2">WhatsApp *</label>
             <input
               type="tel"
               id="phone"
@@ -51,11 +45,9 @@
               placeholder="999 888 777"
             />
           </div>
-
+          
           <div>
-            <label class="block text-sm font-medium text-gray-300 mb-2"
-              >Email *</label
-            >
+            <label class="block text-sm font-medium text-gray-300 mb-2">Email *</label>
             <input
               type="email"
               id="email"
@@ -71,25 +63,14 @@
       <!-- Tipo de Servicio -->
       <div class="space-y-4">
         <h3 class="text-lg font-semibold text-white flex items-center mb-4">
-          <span
-            class="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center text-sm mr-3"
-            >2</span
-          >
+          <span class="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center text-sm mr-3">2</span>
           Selecciona tu servicio
         </h3>
-
+        
         <div class="space-y-3">
           <label class="report-option cursor-pointer block">
-            <input
-              type="radio"
-              name="reportType"
-              value="unico"
-              data-files="1"
-              class="hidden"
-            />
-            <div
-              class="p-4 bg-slate-800 border-2 border-slate-600 rounded-lg transition-all hover:border-blue-500 report-card"
-            >
+            <input type="radio" name="reportType" value="unico" data-files="1" class="hidden" />
+            <div class="p-4 bg-slate-800 border-2 border-slate-600 rounded-lg transition-all hover:border-blue-500 report-card">
               <div class="flex justify-between items-center">
                 <div>
                   <div class="text-white font-semibold">Reporte Único</div>
@@ -101,30 +82,16 @@
           </label>
 
           <label class="report-option cursor-pointer block">
-            <input
-              type="radio"
-              name="reportType"
-              value="pack"
-              data-files="3"
-              class="hidden"
-            />
-            <div
-              class="p-4 bg-slate-800 border-2 border-slate-600 rounded-lg transition-all hover:border-purple-500 report-card relative"
-            >
-              <div
-                class="absolute -top-2 -right-2 bg-pink-500 text-white px-2 py-1 rounded-full text-xs"
-              >
+            <input type="radio" name="reportType" value="pack" data-files="3" class="hidden" />
+            <div class="p-4 bg-slate-800 border-2 border-slate-600 rounded-lg transition-all hover:border-purple-500 report-card relative">
+              <div class="absolute -top-2 -right-2 bg-pink-500 text-white px-2 py-1 rounded-full text-xs">
                 Más Popular
               </div>
               <div class="flex justify-between items-center">
                 <div>
                   <div class="text-white font-semibold">Pack 3 Reportes</div>
-                  <div class="text-gray-400 text-sm">
-                    3 documentos diferentes
-                  </div>
-                  <div class="text-green-400 text-xs font-medium">
-                    Ahorro 28%
-                  </div>
+                  <div class="text-gray-400 text-sm">3 documentos diferentes</div>
+                  <div class="text-green-400 text-xs font-medium">Ahorro 28%</div>
                 </div>
                 <div class="text-2xl font-bold text-purple-400">S/15</div>
               </div>
@@ -136,28 +103,16 @@
       <!-- Método de Entrega -->
       <div class="space-y-4">
         <h3 class="text-lg font-semibold text-white flex items-center mb-4">
-          <span
-            class="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center text-sm mr-3"
-            >3</span
-          >
+          <span class="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center text-sm mr-3">3</span>
           ¿Cómo quieres recibir tu reporte?
         </h3>
-
+        
         <div class="space-y-3">
           <label class="delivery-option cursor-pointer block">
-            <input
-              type="radio"
-              name="deliveryMethod"
-              value="whatsapp"
-              class="hidden"
-            />
-            <div
-              class="p-4 bg-slate-800 border-2 border-slate-600 rounded-lg transition-all hover:border-green-500 delivery-card"
-            >
+            <input type="radio" name="deliveryMethod" value="whatsapp" class="hidden" />
+            <div class="p-4 bg-slate-800 border-2 border-slate-600 rounded-lg transition-all hover:border-green-500 delivery-card">
               <div class="flex items-center">
-                <div
-                  class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center mr-3"
-                >
+                <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center mr-3">
                   <span class="text-white">📱</span>
                 </div>
                 <div>
@@ -169,19 +124,10 @@
           </label>
 
           <label class="delivery-option cursor-pointer block">
-            <input
-              type="radio"
-              name="deliveryMethod"
-              value="email"
-              class="hidden"
-            />
-            <div
-              class="p-4 bg-slate-800 border-2 border-slate-600 rounded-lg transition-all hover:border-blue-500 delivery-card"
-            >
+            <input type="radio" name="deliveryMethod" value="email" class="hidden" />
+            <div class="p-4 bg-slate-800 border-2 border-slate-600 rounded-lg transition-all hover:border-blue-500 delivery-card">
               <div class="flex items-center">
-                <div
-                  class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center mr-3"
-                >
+                <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center mr-3">
                   <span class="text-white">📧</span>
                 </div>
                 <div>
@@ -196,19 +142,14 @@
     </div>
 
     <!-- COLUMNA DERECHA -->
-    <div
-      class="bg-slate-900 border border-slate-700 rounded-xl p-6 md:p-8 space-y-6"
-    >
+    <div class="bg-slate-900 border border-slate-700 rounded-xl p-6 md:p-8 space-y-6">
       <!-- Subir Documentos -->
       <div class="space-y-4">
         <h3 class="text-lg font-semibold text-white flex items-center mb-4">
-          <span
-            class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-sm mr-3"
-            >4</span
-          >
+          <span class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-sm mr-3">4</span>
           Subir <span id="file-count-text">documento(s)</span>
         </h3>
-
+        
         <div id="file-upload-container">
           <input
             type="file"
@@ -238,13 +179,10 @@
       <!-- Comprobante de Pago -->
       <div class="space-y-4">
         <h3 class="text-lg font-semibold text-white flex items-center mb-4">
-          <span
-            class="w-8 h-8 bg-pink-500 rounded-full flex items-center justify-center text-sm mr-3"
-            >5</span
-          >
+          <span class="w-8 h-8 bg-pink-500 rounded-full flex items-center justify-center text-sm mr-3">5</span>
           Comprobante de pago
         </h3>
-
+        
         <div>
           <input
             type="file"
@@ -269,19 +207,17 @@
       <!-- Mensaje Opcional -->
       <div class="space-y-4">
         <h3 class="text-lg font-semibold text-white flex items-center mb-4">
-          <span
-            class="w-8 h-8 bg-indigo-500 rounded-full flex items-center justify-center text-sm mr-3"
-            >6</span
-          >
+          <span class="w-8 h-8 bg-indigo-500 rounded-full flex items-center justify-center text-sm mr-3">6</span>
           Mensaje adicional (opcional)
         </h3>
-
+        
         <textarea
           id="message"
           name="message"
           rows="4"
           class="w-full px-4 py-3 bg-slate-800 border border-slate-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all resize-none"
-          placeholder="¿Alguna instrucción especial?"></textarea>
+          placeholder="¿Alguna instrucción especial?"
+        ></textarea>
       </div>
 
       <!-- Botón de Envío -->
@@ -289,7 +225,6 @@
         <button
           type="submit"
           id="submitBtn"
-          form="turnitinForm"
           class="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-medium py-4 rounded-lg transition-all transform hover:-translate-y-1 shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
           disabled
         >
@@ -299,23 +234,23 @@
     </div>
   </div>
 
-  <!-- Formulario invisible para mantener la estructura -->
-  <form id="turnitinForm" class="hidden"></form>
-
-  <!-- Resumen (spanning full width) -->
-  <div
-    id="summary"
-    class="mt-8 bg-blue-900 border border-blue-700 rounded-lg p-4 hidden max-w-7xl mx-auto"
-  >
+  <!-- Resumen -->
+  <div id="summary" class="mt-8 bg-blue-900 border border-blue-700 rounded-lg p-4 hidden max-w-7xl mx-auto">
     <h4 class="text-white font-medium mb-2">📋 Resumen de tu solicitud:</h4>
-    <div
-      id="summary-content"
-      class="text-sm text-gray-300 grid grid-cols-1 md:grid-cols-3 gap-4"
-    >
-    </div>
+    <div id="summary-content" class="text-sm text-gray-300 grid grid-cols-1 md:grid-cols-3 gap-4"></div>
   </div>
 </section>
 
-<!-- Script separado -->
-<script src="/scripts/simple-turnitin-form.js" defer></script>
+<!-- Pasar variables de entorno al script -->
+<script define:vars={{ telegramConfig }}>
+  window.TELEGRAM_BOT_TOKEN = telegramConfig.botToken;
+  window.TELEGRAM_CHAT_ID = telegramConfig.chatId;
+  
+  console.log('📧 Variables de Telegram configuradas:', {
+    botToken: telegramConfig.botToken ? 'CONFIGURADO ✅' : 'NO CONFIGURADO ❌',
+    chatId: telegramConfig.chatId ? 'CONFIGURADO ✅' : 'NO CONFIGURADO ❌'
+  });
+</script>
 
+<!-- Cargar el script después -->
+<script src="/scripts/simple-turnitin-form.js" defer></script>

@@ -1,18 +1,21 @@
+// public/scripts/simple-turnitin-form.js
+// Versión sin simulaciones - usa las variables de entorno reales
+
 class SimpleTurnitinForm {
   constructor() {
     this.uploadedFiles = [];
     this.paymentFile = null;
     this.maxFiles = 1;
-    
+
     this.init();
   }
 
   init() {
-    console.log('🚀 Inicializando formulario Turnitin simplificado...');
-    
+    console.log('🚀 Inicializando formulario Turnitin...');
+
     this.bindEvents();
-    this.validateForm(); // Validación inicial
-    
+    this.validateForm();
+
     console.log('✅ Formulario inicializado correctamente');
   }
 
@@ -39,7 +42,7 @@ class SimpleTurnitinForm {
       paymentInput.addEventListener('change', (e) => this.handlePaymentUpload(e));
     }
 
-    // Validación en tiempo real de campos de texto
+    // Validación en tiempo real
     ['fullName', 'phone', 'email', 'message'].forEach(fieldId => {
       const field = document.getElementById(fieldId);
       if (field) {
@@ -67,7 +70,7 @@ class SimpleTurnitinForm {
     // Marcar seleccionado
     const card = e.target.closest('.report-option').querySelector('.report-card');
     card.classList.remove('border-slate-600');
-    
+
     if (e.target.value === 'unico') {
       card.classList.add('border-blue-500', 'bg-blue-900/30');
     } else {
@@ -78,9 +81,9 @@ class SimpleTurnitinForm {
     this.maxFiles = parseInt(e.target.dataset.files);
     this.updateFileUploadConfig();
 
-    // Limpiar archivos existentes si cambia el tipo
+    // Limpiar archivos existentes
     this.clearUploadedFiles();
-    
+
     this.validateForm();
   }
 
@@ -96,7 +99,7 @@ class SimpleTurnitinForm {
     // Marcar seleccionado
     const card = e.target.closest('.delivery-option').querySelector('.delivery-card');
     card.classList.remove('border-slate-600');
-    
+
     if (e.target.value === 'whatsapp') {
       card.classList.add('border-green-500', 'bg-green-900/30');
     } else {
@@ -123,13 +126,9 @@ class SimpleTurnitinForm {
   }
 
   handleDocumentUpload(e) {
-    console.log('📁 Procesando documentos...');
-
     const files = Array.from(e.target.files);
-    
-    if (files.length === 0) {
-      return;
-    }
+
+    if (files.length === 0) return;
 
     // Validar número de archivos
     if (files.length > this.maxFiles) {
@@ -152,13 +151,9 @@ class SimpleTurnitinForm {
     this.uploadedFiles = validFiles;
     this.showFilePreview();
     this.validateForm();
-
-    console.log(`✅ ${validFiles.length} archivo(s) cargado(s) correctamente`);
   }
 
   handlePaymentUpload(e) {
-    console.log('💳 Procesando comprobante...');
-
     const file = e.target.files[0];
     if (!file) return;
 
@@ -166,7 +161,6 @@ class SimpleTurnitinForm {
       this.paymentFile = file;
       this.showPaymentPreview(file);
       this.validateForm();
-      console.log(`✅ Comprobante cargado: ${file.name}`);
     } else {
       e.target.value = '';
     }
@@ -216,9 +210,9 @@ class SimpleTurnitinForm {
     this.uploadedFiles.forEach((file, index) => {
       const div = document.createElement('div');
       div.className = 'bg-slate-800/50 border border-slate-600 rounded-lg p-4 flex items-center justify-between';
-      
-      const truncatedName = file.name.length > 25 ? 
-        file.name.substring(0, 25) + '...' : 
+
+      const truncatedName = file.name.length > 25 ?
+        file.name.substring(0, 25) + '...' :
         file.name;
 
       div.innerHTML = `
@@ -243,8 +237,8 @@ class SimpleTurnitinForm {
     const preview = document.getElementById('payment-preview');
     if (!preview) return;
 
-    const truncatedName = file.name.length > 25 ? 
-      file.name.substring(0, 25) + '...' : 
+    const truncatedName = file.name.length > 25 ?
+      file.name.substring(0, 25) + '...' :
       file.name;
 
     preview.innerHTML = `
@@ -270,36 +264,32 @@ class SimpleTurnitinForm {
     this.uploadedFiles = [];
     const preview = document.getElementById('files-preview');
     const documentsInput = document.getElementById('documents');
-    
+
     if (preview) preview.classList.add('hidden');
     if (documentsInput) documentsInput.value = '';
   }
 
   removeFile(index) {
-    console.log(`🗑️ Removiendo archivo en índice ${index}`);
-
     this.uploadedFiles.splice(index, 1);
-    
+
     if (this.uploadedFiles.length === 0) {
       this.clearUploadedFiles();
     } else {
       this.showFilePreview();
     }
-    
+
     this.validateForm();
   }
 
   removePayment() {
-    console.log('🗑️ Removiendo comprobante de pago');
-
     this.paymentFile = null;
-    
+
     const paymentInput = document.getElementById('payment');
     const paymentPreview = document.getElementById('payment-preview');
-    
+
     if (paymentInput) paymentInput.value = '';
     if (paymentPreview) paymentPreview.classList.add('hidden');
-    
+
     this.validateForm();
   }
 
@@ -317,7 +307,7 @@ class SimpleTurnitinForm {
     const isEmailValid = emailRegex.test(email);
 
     const isValid = fullName && phone && email && isEmailValid && reportType && deliveryMethod && hasFiles && hasPayment;
-    
+
     const submitBtn = document.getElementById('submitBtn');
     if (submitBtn) {
       submitBtn.disabled = !isValid;
@@ -335,30 +325,29 @@ class SimpleTurnitinForm {
   updateSummary() {
     const reportType = document.querySelector('input[name="reportType"]:checked');
     const deliveryMethod = document.querySelector('input[name="deliveryMethod"]:checked');
-    
+
     if (reportType && deliveryMethod && this.uploadedFiles.length > 0) {
       const summary = document.getElementById('summary');
       const content = document.getElementById('summary-content');
-      
+
       if (summary && content) {
         const reportText = reportType.value === 'pack' ? 'Pack 3 Reportes (S/15)' : 'Reporte Único (S/7)';
         const deliveryText = deliveryMethod.value === 'whatsapp' ? 'WhatsApp' : 'Email';
-        
+
         content.innerHTML = `
           <div><strong>Servicio:</strong> ${reportText}</div>
           <div><strong>Archivos:</strong> ${this.uploadedFiles.length} documento(s)</div>
           <div><strong>Entrega:</strong> ${deliveryText}</div>
         `;
-        
+
         summary.classList.remove('hidden');
       }
     }
   }
 
+  // ENVÍO REAL A TELEGRAM - SIN SIMULACIONES
   async handleSubmit(e) {
     e.preventDefault();
-    
-    console.log('📤 Enviando formulario...');
 
     if (!this.validateForm()) {
       this.showAlert('Por favor completa todos los campos requeridos', 'error');
@@ -366,42 +355,34 @@ class SimpleTurnitinForm {
     }
 
     const submitBtn = document.getElementById('submitBtn');
-    if (!submitBtn) return;
-
     const originalText = submitBtn.innerHTML;
-    
+
     // Estado de carga
-    submitBtn.innerHTML = `
-      <svg class="animate-spin w-5 h-5 mr-2 inline" fill="none" viewBox="0 0 24 24">
-        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-      </svg>
-      Enviando...
-    `;
+    submitBtn.innerHTML = '⏳ Enviando...';
     submitBtn.disabled = true;
 
     try {
       // Recopilar datos del formulario
       const formData = this.collectFormData();
-      console.log('📋 Datos recopilados:', formData);
+      console.log('📋 Datos a enviar:', formData);
 
-      // Simular envío (aquí integrarías con tu API)
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      this.showAlert('¡Solicitud enviada correctamente! Te contactaremos pronto.', 'success');
-      
-      // Resetear formulario después de un delay
+      // ENVIAR REALMENTE A TELEGRAM - usando tus credenciales del .env
+      await this.sendToTelegram(formData);
+
+      this.showAlert('✅ Formulario enviado correctamente a Telegram', 'success');
+
+      // Resetear formulario
       setTimeout(() => {
         this.resetForm();
       }, 2000);
 
     } catch (error) {
       console.error('❌ Error al enviar formulario:', error);
-      this.showAlert('Error al enviar la solicitud. Por favor, inténtalo de nuevo.', 'error');
+      this.showAlert(`❌ Error al enviar: ${error.message}`, 'error');
     } finally {
       // Restaurar botón
       submitBtn.innerHTML = originalText;
-      this.validateForm(); // Re-validar para habilitar/deshabilitar
+      submitBtn.disabled = false;
     }
   }
 
@@ -412,27 +393,153 @@ class SimpleTurnitinForm {
     const deliveryMethod = document.querySelector('input[name="deliveryMethod"]:checked');
 
     return {
-      // Información personal
       nombre: nameParts[0] || '',
       apellidos: nameParts.slice(1).join(' ') || '',
       telefono: document.getElementById('phone')?.value.trim() || '',
       correo: document.getElementById('email')?.value.trim() || '',
-      
-      // Configuración del servicio
       tipoReporte: reportType?.value || '',
       metodoEntrega: deliveryMethod?.value || '',
       mensaje: document.getElementById('message')?.value.trim() || '',
-      
-      // Archivos
-      documento: this.uploadedFiles[0] || null, // Para compatibilidad
-      documentos: this.uploadedFiles, // Array completo
+      documentos: this.uploadedFiles,
       imagenPago: this.paymentFile
     };
   }
 
-  resetForm() {
-    console.log('🔄 Reiniciando formulario...');
+  // FUNCIÓN QUE REALMENTE ENVÍA A TELEGRAM
+  async sendToTelegram(formData) {
+    // Obtener credenciales de las variables de entorno de Astro
+    const botToken = window.TELEGRAM_BOT_TOKEN;
+    const chatId = window.TELEGRAM_CHAT_ID;
 
+    if (!botToken || !chatId) {
+      throw new Error('Variables de Telegram no configuradas. Verifica tu .env');
+    }
+
+    console.log('📤 Enviando a Telegram con variables de entorno...');
+
+    // Crear mensaje de texto
+    const mensaje = this.createTelegramMessage(formData);
+
+    // Enviar mensaje de texto
+    await this.sendTelegramMessage(botToken, chatId, mensaje);
+
+    // Enviar documentos si existen
+    if (formData.documentos && formData.documentos.length > 0) {
+      for (let i = 0; i < formData.documentos.length; i++) {
+        const documento = formData.documentos[i];
+        await this.sendTelegramDocument(
+          botToken,
+          chatId,
+          documento,
+          `Documento ${i + 1}/${formData.documentos.length} - ${formData.nombre} ${formData.apellidos}`
+        );
+      }
+    }
+
+    // Enviar imagen si existe
+    if (formData.imagenPago) {
+      await this.sendTelegramPhoto(
+        botToken,
+        chatId,
+        formData.imagenPago,
+        `Comprobante de pago - ${formData.nombre} ${formData.apellidos}`
+      );
+    }
+
+    console.log('✅ Enviado correctamente a Telegram');
+  }
+
+  createTelegramMessage(data) {
+    const tipoReporteText = data.tipoReporte === 'unico' ? 'Reporte Único (S/7)' : 'Pack de 3 Reportes (S/15)';
+    const metodoEntregaText = data.metodoEntrega === 'whatsapp' ? 'WhatsApp' : 'Correo Electrónico';
+
+    return `
+🆕 *NUEVA SOLICITUD DE REVISIÓN TURNITIN*
+
+👤 *Datos del Cliente:*
+• Nombre: ${data.nombre} ${data.apellidos}
+• Teléfono: ${data.telefono}
+• Email: ${data.correo}
+
+📊 *Servicio Solicitado:*
+• Tipo: ${tipoReporteText}
+• Entrega por: ${metodoEntregaText}
+
+📄 *Archivos:*
+• Documentos: ${data.documentos ? data.documentos.length : 0} archivo(s)
+• Comprobante: ${data.imagenPago ? '✅ Adjuntado' : '❌ No adjuntado'}
+
+💬 *Mensaje Adicional:*
+${data.mensaje || 'Sin mensaje adicional'}
+
+⏰ *Fecha:* ${new Date().toLocaleString('es-PE')}
+    `.trim();
+  }
+
+  async sendTelegramMessage(botToken, chatId, message) {
+    const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
+
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        chat_id: chatId,
+        text: message,
+        parse_mode: 'Markdown'
+      })
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(`Error al enviar mensaje: ${response.status} - ${errorData.description || 'Error desconocido'}`);
+    }
+
+    return response.json();
+  }
+
+  async sendTelegramDocument(botToken, chatId, file, caption) {
+    const url = `https://api.telegram.org/bot${botToken}/sendDocument`;
+
+    const formData = new FormData();
+    formData.append('chat_id', chatId);
+    formData.append('document', file);
+    formData.append('caption', caption);
+
+    const response = await fetch(url, {
+      method: 'POST',
+      body: formData
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(`Error al enviar documento: ${response.status} - ${errorData.description || 'Error desconocido'}`);
+    }
+
+    return response.json();
+  }
+
+  async sendTelegramPhoto(botToken, chatId, file, caption) {
+    const url = `https://api.telegram.org/bot${botToken}/sendPhoto`;
+
+    const formData = new FormData();
+    formData.append('chat_id', chatId);
+    formData.append('photo', file);
+    formData.append('caption', caption);
+
+    const response = await fetch(url, {
+      method: 'POST',
+      body: formData
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(`Error al enviar imagen: ${response.status} - ${errorData.description || 'Error desconocido'}`);
+    }
+
+    return response.json();
+  }
+
+  resetForm() {
     // Limpiar campos de texto
     ['fullName', 'phone', 'email', 'message'].forEach(fieldId => {
       const field = document.getElementById(fieldId);
@@ -454,10 +561,10 @@ class SimpleTurnitinForm {
     this.uploadedFiles = [];
     this.paymentFile = null;
     this.maxFiles = 1;
-    
+
     const documentsInput = document.getElementById('documents');
     const paymentInput = document.getElementById('payment');
-    
+
     if (documentsInput) {
       documentsInput.value = '';
       documentsInput.removeAttribute('multiple');
@@ -480,8 +587,6 @@ class SimpleTurnitinForm {
 
     // Re-validar
     this.validateForm();
-
-    console.log('✅ Formulario reiniciado');
   }
 
   formatFileSize(bytes) {
@@ -494,10 +599,10 @@ class SimpleTurnitinForm {
 
   showAlert(message, type = 'info') {
     const alertColors = {
-      'success': 'border-green-500 bg-green-900/20 text-green-300',
-      'error': 'border-red-500 bg-red-900/20 text-red-300',
-      'warning': 'border-yellow-500 bg-yellow-900/20 text-yellow-300',
-      'info': 'border-blue-500 bg-blue-900/20 text-blue-300'
+      'success': 'background: #27ae60;',
+      'error': 'background: #e74c3c;',
+      'warning': 'background: #f39c12;',
+      'info': 'background: #3498db;'
     };
 
     const alertIcons = {
@@ -507,63 +612,43 @@ class SimpleTurnitinForm {
       'info': 'ℹ️'
     };
 
-    const alertDiv = document.createElement('div');
-    alertDiv.className = `fixed top-4 right-4 z-50 max-w-sm border-l-4 ${alertColors[type]} rounded-lg shadow-lg p-4 transform transition-all duration-300 translate-x-full`;
-    
-    alertDiv.innerHTML = `
-      <div class="flex items-start">
-        <span class="text-lg mr-3">${alertIcons[type]}</span>
-        <div class="flex-1">
-          <p class="text-sm font-medium">${message}</p>
-        </div>
-        <button onclick="this.parentElement.parentElement.remove()" class="ml-4 text-gray-400 hover:text-white transition-colors">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-          </svg>
-        </button>
+    const alert = document.createElement('div');
+    alert.style.cssText = `
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 15px 20px;
+      border-radius: 8px;
+      color: white;
+      font-weight: 500;
+      z-index: 10000;
+      max-width: 400px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      ${alertColors[type]}
+    `;
+
+    alert.innerHTML = `
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 10px;">
+        <span>${alertIcons[type]} ${message}</span>
+        <button onclick="this.parentElement.parentElement.remove()" style="background: none; border: none; color: white; cursor: pointer; font-size: 12px; padding: 0; opacity: 0.7;">✖</button>
       </div>
     `;
-    
-    document.body.appendChild(alertDiv);
-    
-    // Animar entrada
+
+    document.body.appendChild(alert);
+
     setTimeout(() => {
-      alertDiv.classList.remove('translate-x-full');
-      alertDiv.classList.add('translate-x-0');
-    }, 100);
-    
-    // Auto remover después de 5 segundos
-    setTimeout(() => {
-      if (alertDiv.parentElement) {
-        alertDiv.classList.add('translate-x-full');
-        setTimeout(() => alertDiv.remove(), 300);
+      if (alert.parentElement) {
+        alert.remove();
       }
     }, 5000);
   }
 }
 
 // Inicialización
-function initializeTurnitinForm() {
-  console.log('🎯 Inicializando formulario Turnitin...');
-  
-  if (typeof window !== 'undefined') {
-    window.turnitinForm = new SimpleTurnitinForm();
-    
-    // Funciones globales para los botones de eliminar
-    window.removeFile = (index) => window.turnitinForm?.removeFile(index);
-    window.removePayment = () => window.turnitinForm?.removePayment();
-    
-    console.log('✅ Formulario disponible globalmente');
-  }
-}
+document.addEventListener('DOMContentLoaded', function () {
+  console.log('🎯 Inicializando formulario Turnitin sin simulaciones...');
 
-// Inicializar cuando el DOM esté listo
-if (typeof document !== 'undefined') {
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initializeTurnitinForm);
-  } else {
-    initializeTurnitinForm();
-  }
-} else {
-  console.warn('⚠️ Document no disponible');
-}
+  window.turnitinForm = new SimpleTurnitinForm();
+
+  console.log('✅ Formulario listo para enviar a Telegram');
+});
