@@ -4,7 +4,7 @@ on:
   # Trigger the workflow every time you push to the `main` branch
   # Using a different branch name? Replace `main` with your branch’s name
   push:
-    branches: [ main ]
+    branches: [main]
   # Allows you to run this workflow manually from the Actions tab on GitHub.
   workflow_dispatch:
 
@@ -26,11 +26,10 @@ jobs:
           # path: . # The root location of your Astro project inside the repository. (optional)
           # node-version: 20 # The specific version of Node that should be used to build your site. Defaults to 20. (optional)
           # package-manager: pnpm@latest # The Node package manager that should be used to install dependencies and build your site. Automatically detected based on your lockfile. (optional)
-        - env:
+        env:
           # Variables de entorno de Telegram
           PUBLIC_TELEGRAM_BOT_TOKEN: ${{ vars.PUBLIC_TELEGRAM_BOT_TOKEN }}
           PUBLIC_TELEGRAM_CHAT_ID: ${{ vars.PUBLIC_TELEGRAM_CHAT_ID }}
-
 
   deploy:
     needs: build
