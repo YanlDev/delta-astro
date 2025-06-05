@@ -109,9 +109,9 @@ class SimpleTurnitinForm {
     const filesNeeded = document.getElementById('files-needed');
     const documentsInput = document.getElementById('documents');
 
-    if (this.maxFiles === 2) {
+    if (this.maxFiles === 3) {
       documentsInput.setAttribute('multiple', 'true');
-      fileCountText.textContent = 'documentos (2)';
+      fileCountText.textContent = 'documentos (3)';
       filesNeeded.textContent = 'archivos';
     } else {
       documentsInput.removeAttribute('multiple');
@@ -326,7 +326,7 @@ class SimpleTurnitinForm {
       const content = document.getElementById('summary-content');
 
       if (summary && content) {
-        const reportText = reportType.value === 'pack' ? 'Pack 2 Reportes (S/15)' : 'Reporte Único (S/10)';
+        const reportText = reportType.value === 'pack' ? 'Pack 3 Reportes (S/10)' : 'Reporte Único (S/5)';
         const deliveryText = deliveryMethod.value === 'whatsapp' ? 'WhatsApp' : 'Email';
 
         content.innerHTML = `
@@ -442,7 +442,7 @@ class SimpleTurnitinForm {
   }
 
   createTelegramMessage(data) {
-    const tipoReporteText = data.tipoReporte === 'unico' ? 'Reporte Único (S/10)' : 'Pack de 2 Reportes (S/15)';
+    const tipoReporteText = data.tipoReporte === 'unico' ? 'Reporte Único (S/5)' : 'Pack de 3 Reportes (S/10)';
     const metodoEntregaText = data.metodoEntrega === 'whatsapp' ? 'WhatsApp' : 'Correo Electrónico';
 
     return `
